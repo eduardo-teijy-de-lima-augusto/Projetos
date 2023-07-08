@@ -7,16 +7,6 @@
 </div>
 
 
->>Essa informação foi repassada pelo Tiago no dia 04/07/2023 pois se trata das Rubricas que estão no ONEDRIVE pasta Anderson (em relação ao SIAPE) e importadas na Tabela CARGAS..RUBRICA1. Apenas para informação registrada por enquanto.
-
-```txt
-00 rubricas de Rendimento e descontos
-01 obrigatórias sindicatos e afins
-02 facultativas 
-03 planos de saúde
-05 cartão de crédito
-99 obrigatórias oficiais
-
 ```
 
 >2. Então vamos copiar os conteudos dos arquivos para um arquivo em SERV.TXT e outro PENS.TXT
