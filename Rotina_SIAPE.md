@@ -455,64 +455,25 @@ SET BaseCalc =
     END
 
     --Alteração dos campos para decimal padrão sql.
-    ALTER TABLE CARGAS..PENSXLS
-    ALTER COLUMN BaseCalc decimal(18,2)
+    ALTER TABLE CARGAS..PENSXLS ALTER COLUMN BaseCalc decimal(18,2)
+    ALTER TABLE CARGAS..PENSXLS ALTER COLUMN Bruta5 decimal(18,2)
+    ALTER TABLE CARGAS..PENSXLS ALTER COLUMN Utilz5 decimal(18,2)
     GO
-    
-    ALTER TABLE CARGAS..PENSXLS
-    ALTER COLUMN Bruta5 decimal(18,2)
+    ALTER TABLE CARGAS..PENSXLS ALTER COLUMN Saldo5 decimal(18,2)
+    ALTER TABLE CARGAS..PENSXLS ALTER COLUMN Bruta35 decimal(18,2)
+    ALTER TABLE CARGAS..PENSXLS ALTER COLUMN Utilz35 decimal(18,2)
     GO
-    
-    ALTER TABLE CARGAS..PENSXLS
-    ALTER COLUMN Utilz5 decimal(18,2)
+    ALTER TABLE CARGAS..PENSXLS ALTER COLUMN Saldo35 decimal(18,2)
+    ALTER TABLE CARGAS..PENSXLS ALTER COLUMN Bruta70 decimal(18,2)
+    ALTER TABLE CARGAS..PENSXLS ALTER COLUMN Utilz70 decimal(18,2)
     GO
-    
-    ALTER TABLE CARGAS..PENSXLS
-    ALTER COLUMN Saldo5 decimal(18,2)
-    GO
-
-    ALTER TABLE CARGAS..PENSXLS
-    ALTER COLUMN Bruta35 decimal(18,2)
-    GO
-
-    ALTER TABLE CARGAS..PENSXLS
-    ALTER COLUMN Utilz35 decimal(18,2)
-    GO
-
-    ALTER TABLE CARGAS..PENSXLS
-    ALTER COLUMN Saldo35 decimal(18,2)
-    GO
-
-    ALTER TABLE CARGAS..PENSXLS
-    ALTER COLUMN Bruta70 decimal(18,2)
-    GO
-    
-    ALTER TABLE CARGAS..PENSXLS
-    ALTER COLUMN Utilz70 decimal(18,2)
-    GO
-    
-    ALTER TABLE CARGAS..PENSXLS
-    ALTER COLUMN Saldo70 decimal(18,2)
-    GO
-    
-    ALTER TABLE CARGAS..PENSXLS
-    ALTER COLUMN Creditos decimal(18,2)
-    GO
-
-    ALTER TABLE CARGAS..PENSXLS
-    ALTER COLUMN Debitos decimal(18,2)
-    GO
-    
-    ALTER TABLE CARGAS..PENSXLS
-    ALTER COLUMN Liquido decimal(18,2)
-    GO
-    
-    ALTER TABLE CARGAS..PENSXLS
-    ALTER COLUMN CPF bigint
-    GO
-
-    ALTER TABLE CARGAS..PENSXLS
-    ALTER COLUMN Margem decimal(18,2)
+    ALTER TABLE CARGAS..PENSXLS ALTER COLUMN Saldo70 decimal(18,2)
+    ALTER TABLE CARGAS..PENSXLS ALTER COLUMN Creditos decimal(18,2)
+    ALTER TABLE CARGAS..PENSXLS ALTER COLUMN Debitos decimal(18,2)
+    GO    
+    ALTER TABLE CARGAS..PENSXLS ALTER COLUMN Liquido decimal(18,2)
+    ALTER TABLE CARGAS..PENSXLS ALTER COLUMN CPF bigint
+    ALTER TABLE CARGAS..PENSXLS ALTER COLUMN Margem decimal(18,2)
     GO
 
 ```
@@ -640,64 +601,25 @@ SET BaseCalc =
     END
 
     --Alteração dos campos para decimal padrão sql.
-    ALTER TABLE CARGAS..SERVXLS
-    ALTER COLUMN BaseCalc decimal(18,2)
+    ALTER TABLE CARGAS..SERVXLS ALTER COLUMN BaseCalc decimal(18,2)
+    ALTER TABLE CARGAS..SERVXLS ALTER COLUMN Bruta5 decimal(18,2)
+    ALTER TABLE CARGAS..SERVXLS ALTER COLUMN Utilz5 decimal(18,2)
     GO
-    
-    ALTER TABLE CARGAS..SERVXLS
-    ALTER COLUMN Bruta5 decimal(18,2)
+    ALTER TABLE CARGAS..SERVXLS ALTER COLUMN Saldo5 decimal(18,2)
+    ALTER TABLE CARGAS..SERVXLS ALTER COLUMN Bruta35 decimal(18,2)
+    ALTER TABLE CARGAS..SERVXLS ALTER COLUMN Utilz35 decimal(18,2)
     GO
-    
-    ALTER TABLE CARGAS..SERVXLS
-    ALTER COLUMN Utilz5 decimal(18,2)
+    ALTER TABLE CARGAS..SERVXLS ALTER COLUMN Saldo35 decimal(18,2)
+    ALTER TABLE CARGAS..SERVXLS ALTER COLUMN Bruta70 decimal(18,2)
+    ALTER TABLE CARGAS..SERVXLS ALTER COLUMN Utilz70 decimal(18,2)
     GO
-    
-    ALTER TABLE CARGAS..SERVXLS
-    ALTER COLUMN Saldo5 decimal(18,2)
+    ALTER TABLE CARGAS..SERVXLS ALTER COLUMN Saldo70 decimal(18,2)
+    ALTER TABLE CARGAS..SERVXLS ALTER COLUMN Creditos decimal(18,2)
     GO
-
-    ALTER TABLE CARGAS..SERVXLS
-    ALTER COLUMN Bruta35 decimal(18,2)
-    GO
-
-    ALTER TABLE CARGAS..SERVXLS
-    ALTER COLUMN Utilz35 decimal(18,2)
-    GO
-
-    ALTER TABLE CARGAS..SERVXLS
-    ALTER COLUMN Saldo35 decimal(18,2)
-    GO
-
-    ALTER TABLE CARGAS..SERVXLS
-    ALTER COLUMN Bruta70 decimal(18,2)
-    GO
-    
-    ALTER TABLE CARGAS..SERVXLS
-    ALTER COLUMN Utilz70 decimal(18,2)
-    GO
-    
-    ALTER TABLE CARGAS..SERVXLS
-    ALTER COLUMN Saldo70 decimal(18,2)
-    GO
-    
-    ALTER TABLE CARGAS..SERVXLS
-    ALTER COLUMN Creditos decimal(18,2)
-    GO
-
-    ALTER TABLE CARGAS..SERVXLS
-    ALTER COLUMN Debitos decimal(18,2)
-    GO
-    
-    ALTER TABLE CARGAS..SERVXLS
-    ALTER COLUMN Liquido decimal(18,2)
-    GO
-    
-    ALTER TABLE CARGAS..SERVXLS
-    ALTER COLUMN CPF bigint
-    GO
-
-    ALTER TABLE CARGAS..SERVXLS
-    ALTER COLUMN Margem decimal(18,2)
+    ALTER TABLE CARGAS..SERVXLS ALTER COLUMN Debitos decimal(18,2)
+    ALTER TABLE CARGAS..SERVXLS ALTER COLUMN Liquido decimal(18,2)
+    ALTER TABLE CARGAS..SERVXLS ALTER COLUMN CPF bigint
+    ALTER TABLE CARGAS..SERVXLS ALTER COLUMN Margem decimal(18,2)
     GO
 
 ```
@@ -815,53 +737,6 @@ CREATE TABLE MOVEDB..Contrato_NEW(
 	[Margem] [numeric](18, 2) NULL
 ) ON [PRIMARY]
 GO
-
-
---Tabela Cadastro em MOVEDB ********Não será usada nesse processo por enquanto (julho23)
-/*
-CREATE TABLE MOVEDB..Cadastro_NEW(
-	[id_contrato] [varchar](50) NULL,
-	[orgao] [varchar](50) NULL,
-	[instituidor] [varchar](50) NULL,
-	[matricula] [varchar](50) NULL,
-	[ds_nome] [varchar](150) NULL,
-	[nr_cpf] [varchar](50) NULL,
-	[dt_nascimento] [varchar](50) NULL,
-	[ds_nome_mae] [varchar](150) NULL,
-	[nr_rg] [varchar](50) NULL,
-	[orgao_expedicao] [varchar](50) NULL,
-	[data_expedicao] [varchar](50) NULL,
-	[endereco] [varchar](150) NULL,
-	[complemento_end] [varchar](150) NULL,
-	[bairro] [varchar](150) NULL,
-	[cep] [varchar](50) NULL,
-	[cidade] [varchar](150) NULL,
-	[uf] [varchar](50) NULL,
-	[cs_banco] [varchar](50) NULL,
-	[agencia] [varchar](50) NULL,
-	[conta_corrente] [varchar](50) NULL,
-	[fone] [varchar](50) NULL,
-	[email] [varchar](150) NULL,
-	[cotas] [varchar](50) NULL,
-	[data_termino] [varchar](50) NULL,
-	[amparo_legal] [varchar](50) NULL,
-	[tipo_pensao] [varchar](50) NULL,
-	[grupo_cargo] [varchar](50) NULL,
-	[cod_cargo] [varchar](50) NULL,
-	[regime_juridico] [varchar](50) NULL,
-	[situacao] [varchar](50) NULL,
-	[data_nasc] [varchar](50) NULL,
-	[tipo_cadastro] [varchar](50) NULL,
-	[Empresa] [varchar](50) NULL,
-	[Cel1] [varchar](50) NULL,
-	[Cel2] [varchar](50) NULL,
-	[Cel3] [varchar](50) NULL,
-	[Fixo1] [varchar](50) NULL,
-	[Fixo2] [varchar](50) NULL,
-	[Acionado] [int] NULL
-) ON [PRIMARY]
-GO
-*/
 
 ```
 >14. Na data de 03/07/2023 alinhamos sobre a inserção dos dados nas tabelas de produção e o que foi acordado até o momento é que vamos nos basear no que está até então na tabela de produção. Desta forma pegamos as rubricas que o DBA até o momento separa e encontramos um total de 106.
