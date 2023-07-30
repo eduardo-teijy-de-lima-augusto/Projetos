@@ -59,7 +59,7 @@ BEGIN
               ,0 NaoPerturbe
             FROM [dbo].[Telefone]
              UNION
-		    SELECT [Cpf]
+            SELECT [Cpf]
               ,[Empresa]
               ,[Tel2] as Tel
               ,2 Posicao
@@ -68,7 +68,7 @@ BEGIN
               ,0 NaoPerturbe
             FROM [dbo].[Telefone]
              UNION
-		    SELECT [Cpf]
+            SELECT [Cpf]
               ,[Empresa]
               ,[Tel3] as Tel
               ,3 Posicao
@@ -77,7 +77,7 @@ BEGIN
               ,0 NaoPerturbe
             FROM [dbo].[Telefone]
              UNION
-		    SELECT [Cpf]
+            SELECT [Cpf]
               ,[Empresa]
               ,[Tel4] as Tel
               ,4 Posicao
@@ -86,7 +86,7 @@ BEGIN
               ,0 NaoPerturbe
             FROM [dbo].[Telefone]
              UNION
-		    SELECT [Cpf]
+            SELECT [Cpf]
               ,[Empresa]
               ,[Tel5] as Tel
               ,5 Posicao
