@@ -1,8 +1,8 @@
 >1. Inicio do processo para subir a base de SI mensal em DB. Os mesmos devem juntar com a mesma estrutura a principio copiando via CMD os tipos S e P. Abaixo vamos descrever esse processo.
 
-```
+---
 
->2. Então vamos copiar os conteudos dos arquivos para um arquivo em S.TXT e outro P.TXT
+>2. Copiar os conteudos dos arquivos para um arquivo em S.TXT e outro P.TXT
 
 ```txt
 copy "* S d8" S.txt
@@ -14,10 +14,10 @@ copy "* p d8" P.txt
 ```
 >Copiando todos os arquivos que tem no nome o P d8 para P.TXT
 
->3. Essa é a estrutura das tabelas para inserção dos dados do arquivo.
+>3. Criação da estrutura das tabelas para inserção dos dados dos arquivos.
 
 ```sql
---Essa estrutura cria o arquivo que vai receber os campos que foram adicionados em PENS.TXT
+--Essa estrutura cria o arquivo que vai receber os campos que foram adicionados em P.TXT
 
 CREATE TABLE CARGAS.[dbo].[D8P_Geral](
 	[Orgao] [nvarchar](5) NULL,
@@ -38,7 +38,7 @@ CREATE TABLE CARGAS.[dbo].[D8P_Geral](
 ) ON [PRIMARY]
 GO
 
---Essa estrutura cria o arquivo que vai receber os campos que foram adicionados em SERV.TXT
+--Essa estrutura cria o arquivo que vai receber os campos que foram adicionados em S.TXT
 CREATE TABLE CARGAS.[dbo].[D8S_Geral](
 	[Orgao] [nvarchar](5) NULL,
 	[Matricula] [nvarchar](7) NULL,
@@ -59,13 +59,13 @@ GO
 ```
 ---
 
->4. Subir o arquivo P.TXT e S.TXT para tabelas mesmo com apenas uma coluna, pois vamos usar o SUBSTRING para que possamos inserir nas tabelas acima criadas os dados do arquivo. ***RETIRE A OPÇÃO DE CABEÇALHO POIS OS ARQUIVOS NAO POSSUEM CABEÇALHO**.
+>4. Subir o arquivo P.TXT e S.TXT para tabelas lembrando que nao há delimitador, dessa forma a tabela terá apenas uma coluna. Usaremos a função SUBSTRING para que possamos inserir nas tabelas acima criadas os dados do arquivo. ***RETIRE A OPÇÃO DE CABEÇALHO POIS OS ARQUIVOS NAO POSSUEM CABEÇALHO**.
 ---
 
->5. Essa é a forma para padronizar os campos da tabela D8P_Geral e D8S_Geral.
+>5. Insira os dados de cada tabela para D8P_Geral e D8S_Geral.
 ```sql
 
---Inserindo dados da tabela CARGAS.PENS conforme orientação sobre as posições de cada campo.
+--Inserindo dados da tabela CARGAS.P conforme orientação sobre as posições de cada campo.
 INSERT INTO CARGAS..D8Pensao_Geral  
                             (Orgao
                             ,Instituidor
@@ -139,34 +139,34 @@ INSERT INTO CARGAS..D8Serv_Geral
 >6. O campo Valor_PMT vem no formato 0000139200. É necessario transormar ele para decimal(18,2), entretanto temos que nos atentar pois só mudar o campo para decimal fará com que 139200 fique como 13920.00 o que esta errado, o valor correto seria 1392.00.
 
 ```sql
---Deleta algum registro sujo vazio da tabela CARGAS..D8Pensao_Geral
-DELETE FROM CARGAS..D8Pensao_Geral
+--Deleta algum registro sujo vazio da tabela CARGAS..D8P_Geral
+DELETE FROM CARGAS..D8P_Geral
 WHERE Instituidor='' AND Matricula='' AND UPAG='' AND UF=''
 GO
 
---Altera o campo para decimal da tabela CARGAS..D8Pensao_Geral
-ALTER TABLE CARGAS..D8Pensao_Geral
+--Altera o campo para decimal da tabela CARGAS..D8P_Geral
+ALTER TABLE CARGAS..D8P_Geral
 ALTER COLUMN VALOR_PMT DECIMAL(18,2)
 GO
 
---Update do valor correto dividindo por 100 da tabela CARGAS..D8Pensao_Geral
-UPDATE CARGAS..D8Pensao_Geral
+--Update do valor correto dividindo por 100 da tabela CARGAS..D8P_Geral
+UPDATE CARGAS..D8P_Geral
 SET Valor_PMT=CAST(VALOR_PMT AS decimal (18,2)) /100
 GO 
 
 
 --Deleta algum registro sujo vazio da tabela CARGAS..D8Serv_Geral
-DELETE FROM CARGAS..D8Serv_Geral
+DELETE FROM CARGAS..D8S_Geral
 WHERE Valor_PMT='' AND Matricula='' AND UPAG='' AND UF=''
 GO
 
 --Altera o campo para decimal CARGAS..D8Serv_Geral
-ALTER TABLE CARGAS..D8Serv_Geral
+ALTER TABLE CARGAS..D8S_Geral
 ALTER COLUMN VALOR_PMT DECIMAL(18,2)
 GO
 
 --Update do valor correto dividindo por 100. CARGAS..D8Serv_Geral
-UPDATE CARGAS..D8Serv_Geral
+UPDATE CARGAS..D8S_Geral
 SET Valor_PMT=CAST(VALOR_PMT AS decimal (18,2)) /100
 GO 
 
