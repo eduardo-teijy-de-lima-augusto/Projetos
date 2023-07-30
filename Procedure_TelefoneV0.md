@@ -47,8 +47,8 @@ BEGIN
 		    DROP TABLE TelefoneV0_OLD
 		END
 		
-		-------------------------------------------------------------------------------
-		--2 TABELA CP..Telefone Horizontal para CP..TelefoneV1 Vertical
+-------------------------------------------------------------------------------
+--2 TABELA CP..Telefone Horizontal para CP..TelefoneV1 Vertical
         SELECT * INTO dbo.TelefoneV1 from
             (SELECT [Cpf]
               ,[Empresa]
