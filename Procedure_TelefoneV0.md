@@ -54,45 +54,45 @@ BEGIN
               ,[Empresa]
               ,[Tel1] as Tel
               ,1 Posicao
-			  ,[DataEnriquecimento]
+              ,[DataEnriquecimento]
               ,[Lote]
-			  ,0 NaoPerturbe
+              ,0 NaoPerturbe
 		  FROM [dbo].[Telefone]
 		union
 		SELECT [Cpf]
               ,[Empresa]
               ,[Tel2] as Tel
               ,2 Posicao
-			  ,[DataEnriquecimento]
+              ,[DataEnriquecimento]
               ,[Lote]
-			  ,0 NaoPerturbe
+              ,0 NaoPerturbe
 		  FROM [dbo].[Telefone]
 		union
 		SELECT [Cpf]
               ,[Empresa]
               ,[Tel3] as Tel
               ,3 Posicao
-			  ,[DataEnriquecimento]
+              ,[DataEnriquecimento]
               ,[Lote]
-			  ,0 NaoPerturbe
+              ,0 NaoPerturbe
 		  FROM [dbo].[Telefone]
 		union
 		SELECT [Cpf]
               ,[Empresa]
               ,[Tel4] as Tel
               ,4 Posicao
-			  ,[DataEnriquecimento]
+              ,[DataEnriquecimento]
               ,[Lote]
-			  ,0 NaoPerturbe
+              ,0 NaoPerturbe
 		  FROM [dbo].[Telefone]
 		union
 		SELECT [Cpf]
               ,[Empresa]
               ,[Tel5] as Tel
               ,5 Posicao
-			  ,[DataEnriquecimento]
+              ,[DataEnriquecimento]
               ,[Lote]
-			  ,0 NaoPerturbe
+              ,0 NaoPerturbe
 		  FROM [dbo].[Telefone]
 		  ) a
 		  where tel is not null and Tel<>0
