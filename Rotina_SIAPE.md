@@ -1,32 +1,25 @@
->1. Inicio do processo para subir a base de SIAPE mensal em MOVEDB. Os arquivos vem dessa forma como a figura demonstra. Os mesmos devem juntar com a mesma estrutura a principio copiando via CMD os tipos SERV e PENS. Abaixo vamos descrever esse processo.
-
-
-
-<div align="center">
-    <img src="./Pngs/RotinaSIAPEArquivos.png" alt="DashGo Sistema" height="200">
-</div>
-
+>1. Inicio do processo para subir a base de SI mensal em DB. Os mesmos devem juntar com a mesma estrutura a principio copiando via CMD os tipos S e P. Abaixo vamos descrever esse processo.
 
 ```
 
->2. Então vamos copiar os conteudos dos arquivos para um arquivo em SERV.TXT e outro PENS.TXT
+>2. Então vamos copiar os conteudos dos arquivos para um arquivo em S.TXT e outro P.TXT
 
 ```txt
-copy "* SERV d8" SERV.txt
+copy "* S d8" S.txt
 ```
->Copiando todos os arquivos que tem no nome o SERV d8 para SERV.TXT
+>Copiando todos os arquivos que tem no nome o S d8 para S.TXT
 
 ```txt
-copy "* pens d8" PENS.txt
+copy "* p d8" P.txt
 ```
->Copiando todos os arquivos que tem no nome o PENS d8 para PENS.TXT
+>Copiando todos os arquivos que tem no nome o P d8 para P.TXT
 
 >3. Essa é a estrutura das tabelas para inserção dos dados do arquivo.
 
 ```sql
 --Essa estrutura cria o arquivo que vai receber os campos que foram adicionados em PENS.TXT
 
-CREATE TABLE CARGAS.[dbo].[D8Pensao_Geral](
+CREATE TABLE CARGAS.[dbo].[D8P_Geral](
 	[Orgao] [nvarchar](5) NULL,
 	[Instituidor] [nvarchar](7) NULL,
 	[Matricula] [nvarchar](8) NULL,
@@ -46,7 +39,7 @@ CREATE TABLE CARGAS.[dbo].[D8Pensao_Geral](
 GO
 
 --Essa estrutura cria o arquivo que vai receber os campos que foram adicionados em SERV.TXT
-CREATE TABLE CARGAS.[dbo].[D8Serv_Geral](
+CREATE TABLE CARGAS.[dbo].[D8S_Geral](
 	[Orgao] [nvarchar](5) NULL,
 	[Matricula] [nvarchar](7) NULL,
 	[UPAG] [nvarchar](9) NULL,
@@ -66,14 +59,15 @@ GO
 ```
 ---
 
->4. Subir o arquivo PENS.TXT e SERV.TXT para tabelas mesmo com apenas uma coluna, pois vamos usar o SUBSTRING para que possamos inserir nas tabelas acima criadas os dados do arquivo. ***RETIRE A OPÇÃO DE CABEÇALHO POIS OS ARQUIVOS NAO POSSUEM CABEÇALHO**.
+>4. Subir o arquivo P.TXT e S.TXT para tabelas mesmo com apenas uma coluna, pois vamos usar o SUBSTRING para que possamos inserir nas tabelas acima criadas os dados do arquivo. ***RETIRE A OPÇÃO DE CABEÇALHO POIS OS ARQUIVOS NAO POSSUEM CABEÇALHO**.
 ---
 
->5. Essa é a forma para padronizar os campos da tabela D8Pensao_Geral e D8Serv_Geral.
+>5. Essa é a forma para padronizar os campos da tabela D8P_Geral e D8S_Geral.
 ```sql
 
 --Inserindo dados da tabela CARGAS.PENS conforme orientação sobre as posições de cada campo.
-INSERT INTO CARGAS..D8Pensao_Geral  (Orgao
+INSERT INTO CARGAS..D8Pensao_Geral  
+                            (Orgao
                             ,Instituidor
                             ,Matricula
                             ,UPAG
@@ -108,7 +102,8 @@ INSERT INTO CARGAS..D8Pensao_Geral  (Orgao
 GO
 
 --Inserindo dados da tabela CARGAS.SERV conforme orientação sobre as posições de cada campo.
-INSERT INTO CARGAS..D8Serv_Geral(Orgao
+INSERT INTO CARGAS..D8Serv_Geral
+                            (Orgao
                             ,Matricula
                             ,UPAG
                             ,UF
