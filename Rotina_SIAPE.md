@@ -98,10 +98,10 @@ INSERT INTO CARGAS..D8Pensao_Geral
         ,SUBSTRING([Column 0],114,12) AS NaoUsar2
         ,SUBSTRING([Column 0],126,20) AS Contrato
         ,SUBSTRING([Column 0],146,7)  AS NaoUsar4
-    FROM CARGAS..PENS
+    FROM CARGAS..P
 GO
 
---Inserindo dados da tabela CARGAS.SERV conforme orientação sobre as posições de cada campo.
+--Inserindo dados da tabela CARGAS.S conforme orientação sobre as posições de cada campo.
 INSERT INTO CARGAS..D8Serv_Geral
                             (Orgao
                             ,Matricula
@@ -132,7 +132,7 @@ INSERT INTO CARGAS..D8Serv_Geral
         ,SUBSTRING([Column 0],111,12)  AS NaoUsar2
         ,SUBSTRING([Column 0],123,20)  AS Contrato
         ,SUBSTRING([Column 0],143,7)   AS NaoUsar4
-    FROM CARGAS..SERV
+    FROM CARGAS..S
 
   ```
 ---
@@ -192,7 +192,7 @@ SELECT [Orgao]
       ,[NaoUsar2]
       ,[Contrato]
       ,[Naousar4]
-  INTO CARGAS..D8PENSAO_SERV
+  INTO CARGAS..D8P_SERV
   FROM [dbo].[D8Pensao_Geral]
 
   UNION ALL
@@ -212,7 +212,7 @@ SELECT [Orgao]
       ,[NaoUsar2]
       ,[Contrato]
       ,[NaoUsar4]
-  FROM [dbo].[D8Serv_Geral]
+  FROM [dbo].[D8S_Geral]
 
 GO
 
@@ -220,107 +220,107 @@ GO
 
 ---
 
->8. Agora importe as duas tabelas do excel enviadas do mes como exemplo PENS 2023 06 (2306 1945-WINDOWS-PC).xlsx e SERV 2023 06 (2306 1946-WINDOWS-PC).xlsx. ***ABRA OS ARQUIVOS E SALVE AS PLANILHAS PARA .TXT*** Coloque os nomes CARGAS..PENSXLS E SERVXLS para identificar as origens. *****FICAR ATENTO POIS PODE VIR MAIS DE UMA PLANILHA POR ARQUIVO***.  Caso de erro na importação, abra o arquivo de excel e grave as planilhas em .TXT, desta forma funcionará. Abaixo as querys para tratamento apos a correta importação.
+>8. Agora importe as duas tabelas do excel enviadas do mes como exemplo P202306.xlsx e S202306.xlsx. ***ABRA OS ARQUIVOS E SALVE AS PLANILHAS PARA .TXT*** Coloque os nomes CARGAS..PXLS E SXLS para identificar as origens. *****FICAR ATENTO POIS PODE VIR MAIS DE UMA PLANILHA POR ARQUIVO***.  Caso de erro na importação, abra o arquivo de excel e grave as planilhas em .TXT, desta forma funcionará. Abaixo as querys para tratamento apos a correta importação.
 
 ```sql
 --Select simples para visualizar o conteudo e se adequar as colunas.
---Se no arquivo SERVXLS veio mais de uma planilha, teremos que juntar o mesmo em uma tabela.
-SELECT TOP 10 * FROM CARGAS..PENSXLS
-SELECT TOP 10 * FROM CARGAS..SERVXLS
-SELECT TOP 10 * FROM CARGAS..SERVXLS1
+--Se no arquivo SXLS veio mais de uma planilha, teremos que juntar o mesmo em uma tabela.
+SELECT TOP 10 * FROM CARGAS..PXLS
+SELECT TOP 10 * FROM CARGAS..SXLS
+SELECT TOP 10 * FROM CARGAS..SXLS1
 
 ```
 ---
 ```sql
---Vamos padronizar nomes dos campos de CARGAS..PENSXLS, há muitos acentos e espaços nos nomes de colunas.
-EXEC sp_rename 'CARGAS..PENSXLS.[OrgÆo]',         'Orgao',          'COLUMN'	
-EXEC sp_rename 'CARGAS..PENSXLS.[Matricula]',     'Matricula',      'COLUMN'
-EXEC sp_rename 'CARGAS..PENSXLS.[Base Calc]',     'BaseCalc',       'COLUMN'
-EXEC sp_rename 'CARGAS..PENSXLS.[Bruta 5%]',      'Bruta5',         'COLUMN'
-EXEC sp_rename 'CARGAS..PENSXLS.[Utilz 5%]',      'Utilz5',         'COLUMN'
-EXEC sp_rename 'CARGAS..PENSXLS.[Saldo 5%]',      'Saldo5',         'COLUMN'
-EXEC sp_rename 'CARGAS..PENSXLS.[Bruta 35%]',     'Bruta35',        'COLUMN'
-EXEC sp_rename 'CARGAS..PENSXLS.[Utilz 35%]',     'Utilz35',        'COLUMN'
-EXEC sp_rename 'CARGAS..PENSXLS.[Saldo 35%]',     'Saldo35',        'COLUMN'
-EXEC sp_rename 'CARGAS..PENSXLS.[Bruta 70%]',     'Bruta70',        'COLUMN'
-EXEC sp_rename 'CARGAS..PENSXLS.[Utilz 70%]',     'Utilz70',        'COLUMN'
-EXEC sp_rename 'CARGAS..PENSXLS.[Saldo 70%]',     'Saldo70',        'COLUMN'
-EXEC sp_rename 'CARGAS..PENSXLS.[Cr‚ditos]',      'Creditos',       'COLUMN'
-EXEC sp_rename 'CARGAS..PENSXLS.[D‚bitos]',       'Debitos',        'COLUMN'
-EXEC sp_rename 'CARGAS..PENSXLS.[L¡quido]',       'Liquido',        'COLUMN'
-EXEC sp_rename 'CARGAS..PENSXLS.[ARQ  UPAG]',     'ARQUPAG',        'COLUMN'
-EXEC sp_rename 'CARGAS..PENSXLS.[EXC QTD]',       'EXCQTD',         'COLUMN'
-EXEC sp_rename 'CARGAS..PENSXLS.[EXC Soma]',      'EXCSoma',        'COLUMN'
-EXEC sp_rename 'CARGAS..PENSXLS.[RJUR]',          'RJUR',           'COLUMN'
-EXEC sp_rename 'CARGAS..PENSXLS.[Sit Func]',      'SitFunc',        'COLUMN'
-EXEC sp_rename 'CARGAS..PENSXLS.[CPF]',           'CPF',            'COLUMN'
-EXEC sp_rename 'CARGAS..PENSXLS.[Margem]',        'Margem',         'COLUMN'
+--Vamos padronizar nomes dos campos de CARGAS..PXLS, há muitos acentos e espaços nos nomes de colunas.
+EXEC sp_rename 'CARGAS..PXLS.[OrgÆo]',         'Orgao',          'COLUMN'	
+EXEC sp_rename 'CARGAS..PXLS.[Matricula]',     'Matricula',      'COLUMN'
+EXEC sp_rename 'CARGAS..PXLS.[Base Calc]',     'BaseCalc',       'COLUMN'
+EXEC sp_rename 'CARGAS..PXLS.[Bruta 5%]',      'Bruta5',         'COLUMN'
+EXEC sp_rename 'CARGAS..PXLS.[Utilz 5%]',      'Utilz5',         'COLUMN'
+EXEC sp_rename 'CARGAS..PXLS.[Saldo 5%]',      'Saldo5',         'COLUMN'
+EXEC sp_rename 'CARGAS..PXLS.[Bruta 35%]',     'Bruta35',        'COLUMN'
+EXEC sp_rename 'CARGAS..PXLS.[Utilz 35%]',     'Utilz35',        'COLUMN'
+EXEC sp_rename 'CARGAS..PXLS.[Saldo 35%]',     'Saldo35',        'COLUMN'
+EXEC sp_rename 'CARGAS..PXLS.[Bruta 70%]',     'Bruta70',        'COLUMN'
+EXEC sp_rename 'CARGAS..PXLS.[Utilz 70%]',     'Utilz70',        'COLUMN'
+EXEC sp_rename 'CARGAS..PXLS.[Saldo 70%]',     'Saldo70',        'COLUMN'
+EXEC sp_rename 'CARGAS..PXLS.[Cr‚ditos]',      'Creditos',       'COLUMN'
+EXEC sp_rename 'CARGAS..PXLS.[D‚bitos]',       'Debitos',        'COLUMN'
+EXEC sp_rename 'CARGAS..PXLS.[L¡quido]',       'Liquido',        'COLUMN'
+EXEC sp_rename 'CARGAS..PXLS.[ARQ  UPAG]',     'ARQUPAG',        'COLUMN'
+EXEC sp_rename 'CARGAS..PXLS.[EXC QTD]',       'EXCQTD',         'COLUMN'
+EXEC sp_rename 'CARGAS..PXLS.[EXC Soma]',      'EXCSoma',        'COLUMN'
+EXEC sp_rename 'CARGAS..PXLS.[RJUR]',          'RJUR',           'COLUMN'
+EXEC sp_rename 'CARGAS..PXLS.[Sit Func]',      'SitFunc',        'COLUMN'
+EXEC sp_rename 'CARGAS..PXLS.[CPF]',           'CPF',            'COLUMN'
+EXEC sp_rename 'CARGAS..PXLS.[Margem]',        'Margem',         'COLUMN'
 
 
---Vamos padronizar nomes dos campos de CARGAS..SERVXLS, há muitos acentos e espaços nos nomes de colunas.
-EXEC sp_rename 'CARGAS..SERVXLS.[OrgÆo]',         'Orgao',          'COLUMN'	
-EXEC sp_rename 'CARGAS..SERVXLS.[Matricula]',     'Matricula',      'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS.[Base Calc]',     'BaseCalc',       'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS.[Bruta 5%]',      'Bruta5',         'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS.[Utilz 5%]',      'Utilz5',         'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS.[Saldo 5%]',      'Saldo5',         'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS.[Bruta 35%]',     'Bruta35',        'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS.[Utilz 35%]',     'Utilz35',        'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS.[Saldo 35%]',     'Saldo35',        'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS.[Bruta 70%]',     'Bruta70',        'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS.[Utilz 70%]',     'Utilz70',        'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS.[Saldo 70%]',     'Saldo70',        'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS.[Cr‚ditos]',      'Creditos',       'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS.[D‚bitos]',       'Debitos',        'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS.[L¡quido]',       'Liquido',        'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS.[ARQ  UPAG]',     'ARQUPAG',        'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS.[EXC QTD]',       'EXCQTD',         'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS.[EXC Soma]',      'EXCSoma',        'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS.[RJUR]',          'RJUR',           'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS.[Sit Func]',      'SitFunc',        'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS.[CPF]',           'CPF',            'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS.[Margem]',        'Margem',         'COLUMN'
+--Vamos padronizar nomes dos campos de CARGAS..SXLS, há muitos acentos e espaços nos nomes de colunas.
+EXEC sp_rename 'CARGAS..SXLS.[OrgÆo]',         'Orgao',          'COLUMN'	
+EXEC sp_rename 'CARGAS..SXLS.[Matricula]',     'Matricula',      'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS.[Base Calc]',     'BaseCalc',       'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS.[Bruta 5%]',      'Bruta5',         'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS.[Utilz 5%]',      'Utilz5',         'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS.[Saldo 5%]',      'Saldo5',         'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS.[Bruta 35%]',     'Bruta35',        'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS.[Utilz 35%]',     'Utilz35',        'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS.[Saldo 35%]',     'Saldo35',        'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS.[Bruta 70%]',     'Bruta70',        'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS.[Utilz 70%]',     'Utilz70',        'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS.[Saldo 70%]',     'Saldo70',        'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS.[Cr‚ditos]',      'Creditos',       'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS.[D‚bitos]',       'Debitos',        'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS.[L¡quido]',       'Liquido',        'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS.[ARQ  UPAG]',     'ARQUPAG',        'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS.[EXC QTD]',       'EXCQTD',         'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS.[EXC Soma]',      'EXCSoma',        'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS.[RJUR]',          'RJUR',           'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS.[Sit Func]',      'SitFunc',        'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS.[CPF]',           'CPF',            'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS.[Margem]',        'Margem',         'COLUMN'
 
---Vamos padronizar nomes dos campos de CARGAS..SERVXLS1 **(SE HOUVER)**, há muitos acentos e espaços nos nomes de colunas.
-EXEC sp_rename 'CARGAS..SERVXLS1.[OrgÆo]',         'Orgao',          'COLUMN'	
-EXEC sp_rename 'CARGAS..SERVXLS1.[Matricula]',     'Matricula',      'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS1.[Base Calc]',     'BaseCalc',       'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS1.[Bruta 5%]',      'Bruta5',         'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS1.[Utilz 5%]',      'Utilz5',         'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS1.[Saldo 5%]',      'Saldo5',         'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS1.[Bruta 35%]',     'Bruta35',        'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS1.[Utilz 35%]',     'Utilz35',        'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS1.[Saldo 35%]',     'Saldo35',        'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS1.[Bruta 70%]',     'Bruta70',        'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS1.[Utilz 70%]',     'Utilz70',        'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS1.[Saldo 70%]',     'Saldo70',        'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS1.[Cr‚ditos]',      'Creditos',       'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS1.[D‚bitos]',       'Debitos',        'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS1.[L¡quido]',       'Liquido',        'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS1.[ARQ  UPAG]',     'ARQUPAG',        'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS1.[EXC QTD]',       'EXCQTD',         'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS1.[EXC Soma]',      'EXCSoma',        'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS1.[RJUR]',          'RJUR',           'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS1.[Sit Func]',      'SitFunc',        'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS1.[CPF]',           'CPF',            'COLUMN'
-EXEC sp_rename 'CARGAS..SERVXLS1.[Margem]',        'Margem',         'COLUMN'
-
-```
----
->9. Vamos juntar SERVXLS com SERVXLS1, pois no arquivo de excel tinhamos duas abas que forma separadas por limitação do EXCEL em LINHAS.
-
-```sql
---Juntando o conteudo de SERVXLS1 na tabela SERVXLS para completar as duas planilhas de origem.
-INSERT INTO CARGAS..SERVXLS
-SELECT * FROM CARGAS..SERVXLS1
+--Vamos padronizar nomes dos campos de CARGAS..SXLS1 **(SE HOUVER)**, há muitos acentos e espaços nos nomes de colunas.
+EXEC sp_rename 'CARGAS..SXLS1.[OrgÆo]',         'Orgao',          'COLUMN'	
+EXEC sp_rename 'CARGAS..SXLS1.[Matricula]',     'Matricula',      'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS1.[Base Calc]',     'BaseCalc',       'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS1.[Bruta 5%]',      'Bruta5',         'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS1.[Utilz 5%]',      'Utilz5',         'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS1.[Saldo 5%]',      'Saldo5',         'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS1.[Bruta 35%]',     'Bruta35',        'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS1.[Utilz 35%]',     'Utilz35',        'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS1.[Saldo 35%]',     'Saldo35',        'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS1.[Bruta 70%]',     'Bruta70',        'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS1.[Utilz 70%]',     'Utilz70',        'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS1.[Saldo 70%]',     'Saldo70',        'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS1.[Cr‚ditos]',      'Creditos',       'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS1.[D‚bitos]',       'Debitos',        'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS1.[L¡quido]',       'Liquido',        'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS1.[ARQ  UPAG]',     'ARQUPAG',        'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS1.[EXC QTD]',       'EXCQTD',         'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS1.[EXC Soma]',      'EXCSoma',        'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS1.[RJUR]',          'RJUR',           'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS1.[Sit Func]',      'SitFunc',        'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS1.[CPF]',           'CPF',            'COLUMN'
+EXEC sp_rename 'CARGAS..SXLS1.[Margem]',        'Margem',         'COLUMN'
 
 ```
 ---
->10. Processo de ETL completo em PENSXLS e SERVXLS.
+>9. Vamos juntar SXLS com SXLS1, pois no arquivo de excel tinhamos duas abas que forma separadas por limitação do EXCEL em LINHAS.
 
 ```sql
---Alteração dos campos da tabela CARGAS..PENSXLS para valores decimais padrão SQL.
-UPDATE CARGAS..PENSXLS
+--Juntando o conteudo de SXLS1 na tabela SXLS para completar as duas planilhas de origem.
+INSERT INTO CARGAS..SXLS
+SELECT * FROM CARGAS..SXLS1
+
+```
+---
+>10. Processo de ETL completo em PXLS e SXLS.
+
+```sql
+--Alteração dos campos da tabela CARGAS..PXLS para valores decimais padrão SQL.
+UPDATE CARGAS..PXLS
 SET BaseCalc =
     CASE
         WHEN BaseCalc LIKE '%.%' AND BaseCalc LIKE '%,%' THEN REPLACE(REPLACE(BaseCalc, '.', ''), ',', '.')
@@ -440,33 +440,33 @@ SET BaseCalc =
     END
 
     --Alteração dos campos para decimal padrão sql.
-    ALTER TABLE CARGAS..PENSXLS ALTER COLUMN BaseCalc decimal(18,2)
-    ALTER TABLE CARGAS..PENSXLS ALTER COLUMN Bruta5 decimal(18,2)
-    ALTER TABLE CARGAS..PENSXLS ALTER COLUMN Utilz5 decimal(18,2)
+    ALTER TABLE CARGAS..PXLS ALTER COLUMN BaseCalc decimal(18,2)
+    ALTER TABLE CARGAS..PXLS ALTER COLUMN Bruta5 decimal(18,2)
+    ALTER TABLE CARGAS..PXLS ALTER COLUMN Utilz5 decimal(18,2)
     GO
-    ALTER TABLE CARGAS..PENSXLS ALTER COLUMN Saldo5 decimal(18,2)
-    ALTER TABLE CARGAS..PENSXLS ALTER COLUMN Bruta35 decimal(18,2)
-    ALTER TABLE CARGAS..PENSXLS ALTER COLUMN Utilz35 decimal(18,2)
+    ALTER TABLE CARGAS..PXLS ALTER COLUMN Saldo5 decimal(18,2)
+    ALTER TABLE CARGAS..PXLS ALTER COLUMN Bruta35 decimal(18,2)
+    ALTER TABLE CARGAS..PXLS ALTER COLUMN Utilz35 decimal(18,2)
     GO
-    ALTER TABLE CARGAS..PENSXLS ALTER COLUMN Saldo35 decimal(18,2)
-    ALTER TABLE CARGAS..PENSXLS ALTER COLUMN Bruta70 decimal(18,2)
-    ALTER TABLE CARGAS..PENSXLS ALTER COLUMN Utilz70 decimal(18,2)
+    ALTER TABLE CARGAS..PXLS ALTER COLUMN Saldo35 decimal(18,2)
+    ALTER TABLE CARGAS..PXLS ALTER COLUMN Bruta70 decimal(18,2)
+    ALTER TABLE CARGAS..PXLS ALTER COLUMN Utilz70 decimal(18,2)
     GO
-    ALTER TABLE CARGAS..PENSXLS ALTER COLUMN Saldo70 decimal(18,2)
-    ALTER TABLE CARGAS..PENSXLS ALTER COLUMN Creditos decimal(18,2)
-    ALTER TABLE CARGAS..PENSXLS ALTER COLUMN Debitos decimal(18,2)
+    ALTER TABLE CARGAS..PXLS ALTER COLUMN Saldo70 decimal(18,2)
+    ALTER TABLE CARGAS..PXLS ALTER COLUMN Creditos decimal(18,2)
+    ALTER TABLE CARGAS..PXLS ALTER COLUMN Debitos decimal(18,2)
     GO    
-    ALTER TABLE CARGAS..PENSXLS ALTER COLUMN Liquido decimal(18,2)
-    ALTER TABLE CARGAS..PENSXLS ALTER COLUMN CPF bigint
-    ALTER TABLE CARGAS..PENSXLS ALTER COLUMN Margem decimal(18,2)
+    ALTER TABLE CARGAS..PXLS ALTER COLUMN Liquido decimal(18,2)
+    ALTER TABLE CARGAS..PXLS ALTER COLUMN CPF bigint
+    ALTER TABLE CARGAS..PXLS ALTER COLUMN Margem decimal(18,2)
     GO
 
 ```
 ---
->11. Vamos fazer o ETL de CARAS..SERVXLS ***(VERFICAR SE PODEMOS JUNTAR AS DUAS PARA UM ETL SO)*******
+>11. Vamos fazer o ETL de CARAS..SXLS ***(VERFICAR SE PODEMOS JUNTAR AS DUAS PARA UM ETL SO)*******
 ```sql
---Alteração dos campos da tabela CARGAS..SERVXLS para valores decimais padrão SQL.
-UPDATE CARGAS..SERVXLS
+--Alteração dos campos da tabela CARGAS..SXLS para valores decimais padrão SQL.
+UPDATE CARGAS..SXLS
 SET BaseCalc =
     CASE
         WHEN BaseCalc LIKE '%.%' AND BaseCalc LIKE '%,%' THEN REPLACE(REPLACE(BaseCalc, '.', ''), ',', '.')
@@ -586,33 +586,33 @@ SET BaseCalc =
     END
 
     --Alteração dos campos para decimal padrão sql.
-    ALTER TABLE CARGAS..SERVXLS ALTER COLUMN BaseCalc decimal(18,2)
-    ALTER TABLE CARGAS..SERVXLS ALTER COLUMN Bruta5 decimal(18,2)
-    ALTER TABLE CARGAS..SERVXLS ALTER COLUMN Utilz5 decimal(18,2)
+    ALTER TABLE CARGAS..SXLS ALTER COLUMN BaseCalc decimal(18,2)
+    ALTER TABLE CARGAS..SXLS ALTER COLUMN Bruta5 decimal(18,2)
+    ALTER TABLE CARGAS..SXLS ALTER COLUMN Utilz5 decimal(18,2)
     GO
-    ALTER TABLE CARGAS..SERVXLS ALTER COLUMN Saldo5 decimal(18,2)
-    ALTER TABLE CARGAS..SERVXLS ALTER COLUMN Bruta35 decimal(18,2)
-    ALTER TABLE CARGAS..SERVXLS ALTER COLUMN Utilz35 decimal(18,2)
+    ALTER TABLE CARGAS..SXLS ALTER COLUMN Saldo5 decimal(18,2)
+    ALTER TABLE CARGAS..SXLS ALTER COLUMN Bruta35 decimal(18,2)
+    ALTER TABLE CARGAS..SXLS ALTER COLUMN Utilz35 decimal(18,2)
     GO
-    ALTER TABLE CARGAS..SERVXLS ALTER COLUMN Saldo35 decimal(18,2)
-    ALTER TABLE CARGAS..SERVXLS ALTER COLUMN Bruta70 decimal(18,2)
-    ALTER TABLE CARGAS..SERVXLS ALTER COLUMN Utilz70 decimal(18,2)
+    ALTER TABLE CARGAS..SXLS ALTER COLUMN Saldo35 decimal(18,2)
+    ALTER TABLE CARGAS..SXLS ALTER COLUMN Bruta70 decimal(18,2)
+    ALTER TABLE CARGAS..SXLS ALTER COLUMN Utilz70 decimal(18,2)
     GO
-    ALTER TABLE CARGAS..SERVXLS ALTER COLUMN Saldo70 decimal(18,2)
-    ALTER TABLE CARGAS..SERVXLS ALTER COLUMN Creditos decimal(18,2)
+    ALTER TABLE CARGAS..SXLS ALTER COLUMN Saldo70 decimal(18,2)
+    ALTER TABLE CARGAS..SXLS ALTER COLUMN Creditos decimal(18,2)
     GO
-    ALTER TABLE CARGAS..SERVXLS ALTER COLUMN Debitos decimal(18,2)
-    ALTER TABLE CARGAS..SERVXLS ALTER COLUMN Liquido decimal(18,2)
-    ALTER TABLE CARGAS..SERVXLS ALTER COLUMN CPF bigint
-    ALTER TABLE CARGAS..SERVXLS ALTER COLUMN Margem decimal(18,2)
+    ALTER TABLE CARGAS..SXLS ALTER COLUMN Debitos decimal(18,2)
+    ALTER TABLE CARGAS..SXLS ALTER COLUMN Liquido decimal(18,2)
+    ALTER TABLE CARGAS..SXLS ALTER COLUMN CPF bigint
+    ALTER TABLE CARGAS..SXLS ALTER COLUMN Margem decimal(18,2)
     GO
 
 ```
 ---
->12. Após o ETL pronto, vamos juntar as duas tabelas, PENSXLS e SERVXLS. Confirmar com Anderson se podemos juntar as duas.
+>12. Após o ETL pronto, vamos juntar as duas tabelas, PXLS e SXLS. 
 
 ```sql
---Juntando as duas tabelas PENSXLS e SERVXLS que vieram dos arquivos em EXCEL.
+--Juntando as duas tabelas PXLS e SXLS que vieram dos arquivos em EXCEL.
 SELECT [Orgao]
       ,[Instituidor]
       ,[Matricula]
@@ -636,8 +636,8 @@ SELECT [Orgao]
       ,[SitFunc]
       ,[CPF]
       ,[Margem]
-  INTO CARGAS..PENSXLS_SERVXLS
-  FROM CARGAS..[PENSXLS]
+  INTO CARGAS..PXLS_SXLS
+  FROM CARGAS..[PXLS]
 
   UNION ALL
 
@@ -664,17 +664,17 @@ SELECT [Orgao]
       ,[SitFunc]
       ,[CPF]
       ,[Margem]
-  FROM CARGAS..SERVXLS
+  FROM CARGAS..SXLS
 
 GO
 ```
 ---
 
->13. Todos esses dados serão inseridos em diferentes tabelas, então deixei uma query pronta para criação das supostas tabelas usadas em MOVEDB, Cadastro_NEW, Consolidado_NEW, Contrato_NEW. Verificar se precisa de mais tabelas.
+>13. Todos esses dados serão inseridos em diferentes tabelas, então deixei uma query pronta para criação das tabelas usadas em DB, Cadastro_NEW, Consolidado_NEW, Contrato_NEW. Verificar se precisa de mais tabelas.
 
 ```sql
 --Tabela Consolidado em MOVEDB
-CREATE TABLE MOVEDB..Consolidado_NEW(
+CREATE TABLE DB..Consolidado_NEW(
 	[Orgao] [int] NOT NULL,
 	[Instituidor] [bigint] NULL,
 	[Matricula] [bigint] NULL,
@@ -705,7 +705,7 @@ CREATE TABLE MOVEDB..Consolidado_NEW(
 GO
 
 --Tabela Contrato em MOVEDB
-CREATE TABLE MOVEDB..Contrato_NEW(
+CREATE TABLE DB..Contrato_NEW(
 	[IdContrato] [int] IDENTITY(1,1) NOT NULL,
 	[CodOrgao] [int] NULL,
 	[Instituidor] [int] NULL,
@@ -730,7 +730,7 @@ GO
 --Essa query abaixo retirou as 106 da tabela que esta em MOVEDB. Pensando que as rubricas ate entao corretas vieram do ultimo carregamento do Fernando dos dados de SIAPE.
 SELECT DISTINCT RUBRICA 
 INTO CARGAS..ListagemRubrica
-FROM MOVEDB..Contrato
+FROM DB..Contrato
 
 ```
 >15. Baseando-se pela rubricas extraidas vamos fazer um Join entre os dados com essa tabela para inserir corretamente.
@@ -739,7 +739,7 @@ FROM MOVEDB..Contrato
 --Importante esse select para inserir na nova tabela.
 --Os dados estão vindo de um join com tabela de rubrica que hoje esta rodando no servidor tabela CONTRATO EM MOVEDB.
 --Será verificada possibilidade de mudança com as rubricas corretas, deixar essa listagem de rubrica sempre a mão para usar.
-INSERT INTO MOVEDB..Contrato_NEW 
+INSERT INTO DB..Contrato_NEW 
 SELECT A.[Orgao]        AS CodOrgao
       ,[Instituidor]	AS Instituidor
       ,A.[Matricula]	AS Matricula
@@ -753,16 +753,16 @@ SELECT A.[Orgao]        AS CodOrgao
       ,A.[Contrato]     AS Contrato
       ,A.[Rubrica]      AS Rubrica 
       ,NULL             AS Margem
-  FROM [CARGAS].[dbo].[D8PENSAO_SERV] a
+  FROM [CARGAS].[dbo].[D8P_SERV] a
   INNER JOIN CARGAS..listagemrubrica  b on a.Rubrica=b.Rubrica
 
   ```
   ---
-  >16. Agora vamos inserir os dados na tabela MOVEDB..Consolidado_NEW, respeitando alguns campos da forma como é feita hoje (julho23). A coluna "Lixo" ja estava no ETL e estamos continuando o processo. Conforme informações do Anderson esses campos em breve sofrerão atualizações. Outra regra é fazer o update para atualizar o campo Cartao onde Util5 maior que 0.
+  >16. Agora vamos inserir os dados na tabela DB..Consolidado_NEW, respeitando alguns campos da forma como é feita hoje (julho23). A coluna "Lixo" ja estava no ETL e estamos continuando o processo. Conforme informações esses campos em breve sofrerão atualizações. Outra regra é fazer o update para atualizar o campo Cartao onde Util5 maior que 0.
 
   ```sql
-  --INSERT DOS ARQUIVOS JUNTOS VINDO DO EXCEL, PENXLS e SERVXLS na tabela nova de MOVEDB..Consolidado_NEW
-INSERT INTO MOVEDB..Consolidado_NEW
+  --INSERT DOS ARQUIVOS JUNTOS VINDO DO EXCEL, PENXLS e SXLS na tabela nova de MOVEDB..Consolidado_NEW
+INSERT INTO DB..Consolidado_NEW
 SELECT [Orgao]                        AS Orgao
       ,[Instituidor]                  AS Instituidor
       ,[Matricula]                    AS Matricula
@@ -789,13 +789,13 @@ SELECT [Orgao]                        AS Orgao
 	  ,0                              AS Cartao
       ,[Margem]                       AS MargemSaldo
 	  ,NULL                           AS Margem_Antiga
-  FROM CARGAS..PENSXLS_SERVXLS
+  FROM CARGAS..PXLS_SXLS
   WHERE BaseCalc >0       -- Baseando-se na ultima atualização feita pelo DBA
 
 GO
 
 --Update coluna Cartao onde a coluna Util5 maior que 0.00
-UPDATE MOVEDB..Consolidado_NEW
+UPDATE DB..Consolidado_NEW
 SET Cartao=1
 WHERE Util5 >0.00
 
@@ -804,19 +804,19 @@ WHERE Util5 >0.00
 
 ```sql
 --Criação dos Indices tabela MOVEDB..Consolidado_NEW
-CREATE NONCLUSTERED INDEX [Idx_Consolidade_BaseCalc] ON MOVEDB..Consolidado_NEW
+CREATE NONCLUSTERED INDEX [Idx_Consolidade_BaseCalc] ON DB..Consolidado_NEW
 (
 	[BaseCalc] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
 
-CREATE CLUSTERED INDEX [Idx_Consolidado_Cpf] ON MOVEDB..Consolidado_NEW
+CREATE CLUSTERED INDEX [Idx_Consolidado_Cpf] ON DB..Consolidado_NEW
 (
 	[Cpf] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
 
-CREATE NONCLUSTERED INDEX [IDX_N_CLU_BaseCalc_MargemSaldo] ON MOVEDB..Consolidado_NEW
+CREATE NONCLUSTERED INDEX [IDX_N_CLU_BaseCalc_MargemSaldo] ON DB..Consolidado_NEW
 (
 	[BaseCalc] ASC,
 	[MargemSaldo] ASC
@@ -832,7 +832,7 @@ CREATE NONCLUSTERED INDEX [IDX_N_CLU_BaseCalc_SituacaoFuncional_MargemSaldo_INCL
 INCLUDE([Orgao]) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
 
-CREATE NONCLUSTERED INDEX [IDX_N_CLU_OrgaoBaseCalSitucaoFuncionalMargemSaldo] ON MOVEDB..Consolidado_NEW
+CREATE NONCLUSTERED INDEX [IDX_N_CLU_OrgaoBaseCalSitucaoFuncionalMargemSaldo] ON DB..Consolidado_NEW
 (
 	[Orgao] ASC,
 	[BaseCalc] ASC,
@@ -848,7 +848,7 @@ CREATE CLUSTERED INDEX [idx_Contrato_CPF] ON MOVEDB..Contrato_NEW
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
 
-CREATE NONCLUSTERED INDEX [IDX_N_CLU_Prazo_Ufupag_INDLUCE_Nome_Rubrica] ON MOVEDB..Contrato_NEW
+CREATE NONCLUSTERED INDEX [IDX_N_CLU_Prazo_Ufupag_INDLUCE_Nome_Rubrica] ON DB..Contrato_NEW
 (
 	[Prazo] ASC,
 	[UfUpag] ASC
@@ -856,7 +856,7 @@ CREATE NONCLUSTERED INDEX [IDX_N_CLU_Prazo_Ufupag_INDLUCE_Nome_Rubrica] ON MOVED
 INCLUDE([Nome],[Rubrica]) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
 
-CREATE NONCLUSTERED INDEX [IDX_N_CLU_Rubrica_Prazo_ufuPAG_INCLUDE_nome] ON MOVEDB..Contrato_NEW
+CREATE NONCLUSTERED INDEX [IDX_N_CLU_Rubrica_Prazo_ufuPAG_INCLUDE_nome] ON DB..Contrato_NEW
 (
 	[Rubrica] ASC,
 	[Prazo] ASC,
@@ -865,7 +865,7 @@ CREATE NONCLUSTERED INDEX [IDX_N_CLU_Rubrica_Prazo_ufuPAG_INCLUDE_nome] ON MOVED
 INCLUDE([Nome]) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
 
-CREATE NONCLUSTERED INDEX [IDX_N_CLU_Valor_Prazo_UFUPag_INCLUDE_Nome] ON MOVEDB..Contrato_NEW
+CREATE NONCLUSTERED INDEX [IDX_N_CLU_Valor_Prazo_UFUPag_INCLUDE_Nome] ON DB..Contrato_NEW
 (
 	[Valor] ASC,
 	[Prazo] ASC,
@@ -874,7 +874,7 @@ CREATE NONCLUSTERED INDEX [IDX_N_CLU_Valor_Prazo_UFUPag_INCLUDE_Nome] ON MOVEDB.
 INCLUDE([Nome]) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
 
-CREATE NONCLUSTERED INDEX [idxnc_Contrato_Rubrica] ON MOVEDB..Contrato_NEW
+CREATE NONCLUSTERED INDEX [idxnc_Contrato_Rubrica] ON DB..Contrato_NEW
 (
 	[Rubrica] ASC
 )
@@ -883,15 +883,15 @@ GO
 
 ```
 
->18. Terminado o processo renomeie MOVEDB..Consolidado para MOVEDB..Consolidado_OLD e depois MOVEDB..Consolidado_NEW para MOVEDB..Consolidado, faça isso também com a Contrato.
+>18. Terminado o processo renomeie MOVEDB..Consolidado para DB..Consolidado_OLD e depois DB..Consolidado_NEW para MOVEDB..Consolidado, faça isso também com a Contrato.
 
 ```sql
 
-EXEC sp_rename 'MOVEDB..Consolidado', 'Consolidado_OLD'
-EXEC sp_rename 'MOVEDB..Consolidado_NEW', 'Consolidado'
+EXEC sp_rename 'DB..Consolidado', 'Consolidado_OLD'
+EXEC sp_rename 'DB..Consolidado_NEW', 'Consolidado'
 GO
 
-EXEC sp_rename 'MOVEDB..Contrato', 'Contrato_OLD'
-EXEC sp_rename 'MOVEDB..Contrato_NEW', 'Contrato'
+EXEC sp_rename 'DB..Contrato', 'Contrato_OLD'
+EXEC sp_rename 'DB..Contrato_NEW', 'Contrato'
 
 ```
