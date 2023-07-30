@@ -57,8 +57,8 @@ BEGIN
               ,[DataEnriquecimento]
               ,[Lote]
               ,0 NaoPerturbe
-		  FROM [dbo].[Telefone]
-		union
+        FROM [dbo].[Telefone]
+             UNION
 		SELECT [Cpf]
               ,[Empresa]
               ,[Tel2] as Tel
@@ -66,8 +66,8 @@ BEGIN
               ,[DataEnriquecimento]
               ,[Lote]
               ,0 NaoPerturbe
-		  FROM [dbo].[Telefone]
-		union
+        FROM [dbo].[Telefone]
+             UNION
 		SELECT [Cpf]
               ,[Empresa]
               ,[Tel3] as Tel
@@ -75,8 +75,8 @@ BEGIN
               ,[DataEnriquecimento]
               ,[Lote]
               ,0 NaoPerturbe
-		  FROM [dbo].[Telefone]
-		union
+        FROM [dbo].[Telefone]
+             UNION
 		SELECT [Cpf]
               ,[Empresa]
               ,[Tel4] as Tel
@@ -84,8 +84,8 @@ BEGIN
               ,[DataEnriquecimento]
               ,[Lote]
               ,0 NaoPerturbe
-		  FROM [dbo].[Telefone]
-		union
+        FROM [dbo].[Telefone]
+             UNION
 		SELECT [Cpf]
               ,[Empresa]
               ,[Tel5] as Tel
@@ -93,13 +93,13 @@ BEGIN
               ,[DataEnriquecimento]
               ,[Lote]
               ,0 NaoPerturbe
-		  FROM [dbo].[Telefone]
-		  ) a
+        FROM [dbo].[Telefone]
+        ) A
 		  where tel is not null and Tel<>0
 		
 		-----------------------------------------------------------------------------------------
 		--3 Update TelefoneV1 onde v1.tel=v0.tel [CP].[dbo].[TelefoneV0].[NaoPerturbe]
-		UPDATE		A
+		UPDATE      A
 		SET         A.[NaoPerturbe] = B.[NaoPerturbe]
 		FROM        [CP].[dbo].[TelefoneV1] A
 		INNER JOIN  [CP].[dbo].[TelefoneV0] B
