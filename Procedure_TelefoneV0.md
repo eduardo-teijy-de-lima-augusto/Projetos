@@ -107,11 +107,11 @@ BEGIN
 		
 ----------------------------------------------------------------------------------------
 --4 Criar indice na tabela nova gerada CP..TelefoneV1
-		CREATE NONCLUSTERED INDEX [IDX_TF_Cpf] ON [dbo].[TelefoneV1]
-		(
+         CREATE NONCLUSTERED INDEX [IDX_TF_Cpf] ON [dbo].[TelefoneV1]
+         (
              [Cpf] ASC
-		)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-		
+         )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+         
 		
 --------------------------------------------------------------------------------------
 --5 Renomear a tabela em uso de CP..TelefoneV0 para CP..TelefoneV0.old 
