@@ -10,7 +10,7 @@
 
 ---
 
-> Tabela TelefoneV0 atualiada para vertical a cada 48 horas.
+> Tabela TelefoneV0 atualizada para vertical a cada 48 horas.
 
 
 <div align="center">
@@ -125,4 +125,10 @@ BEGIN
 END
 
 ```
-aaa
+---
+
+> Job criado no SQl Agent.
+
+<div align="center">
+    <img src="./Pngs/JobUpdateTelefoneV0.png" alt="DashGo Sistema" height="350">
+</div>
