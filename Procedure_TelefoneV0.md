@@ -49,52 +49,52 @@ BEGIN
 		
 		-------------------------------------------------------------------------------
 		--2 TABELA CP..Telefone Horizontal para CP..TelefoneV1 Vertical
-		SELECT * INTO dbo.TelefoneV1 from
-		(SELECT [Cpf]
+        SELECT * INTO dbo.TelefoneV1 from
+            (SELECT [Cpf]
               ,[Empresa]
               ,[Tel1] as Tel
               ,1 Posicao
               ,[DataEnriquecimento]
               ,[Lote]
               ,0 NaoPerturbe
-        FROM [dbo].[Telefone]
+            FROM [dbo].[Telefone]
              UNION
-		SELECT [Cpf]
+		    SELECT [Cpf]
               ,[Empresa]
               ,[Tel2] as Tel
               ,2 Posicao
               ,[DataEnriquecimento]
               ,[Lote]
               ,0 NaoPerturbe
-        FROM [dbo].[Telefone]
+            FROM [dbo].[Telefone]
              UNION
-		SELECT [Cpf]
+		    SELECT [Cpf]
               ,[Empresa]
               ,[Tel3] as Tel
               ,3 Posicao
               ,[DataEnriquecimento]
               ,[Lote]
               ,0 NaoPerturbe
-        FROM [dbo].[Telefone]
+            FROM [dbo].[Telefone]
              UNION
-		SELECT [Cpf]
+		    SELECT [Cpf]
               ,[Empresa]
               ,[Tel4] as Tel
               ,4 Posicao
               ,[DataEnriquecimento]
               ,[Lote]
               ,0 NaoPerturbe
-        FROM [dbo].[Telefone]
+            FROM [dbo].[Telefone]
              UNION
-		SELECT [Cpf]
+		    SELECT [Cpf]
               ,[Empresa]
               ,[Tel5] as Tel
               ,5 Posicao
               ,[DataEnriquecimento]
               ,[Lote]
               ,0 NaoPerturbe
-        FROM [dbo].[Telefone]
-        ) A
+            FROM [dbo].[Telefone]
+            ) A
 		  where tel is not null and Tel<>0
 		
 		-----------------------------------------------------------------------------------------
