@@ -51,47 +51,47 @@ BEGIN
 		--2 TABELA CP..Telefone Horizontal para CP..TelefoneV1 Vertical
 		SELECT * INTO dbo.TelefoneV1 from
 		(SELECT [Cpf]
-		      ,[Empresa]
-		      ,[Tel1] as Tel
-		      ,1 Posicao
+              ,[Empresa]
+              ,[Tel1] as Tel
+              ,1 Posicao
 			  ,[DataEnriquecimento]
-		      ,[Lote]
+              ,[Lote]
 			  ,0 NaoPerturbe
 		  FROM [dbo].[Telefone]
 		union
 		SELECT [Cpf]
-		      ,[Empresa]
-		      ,[Tel2] as Tel
-		      ,2 Posicao
+              ,[Empresa]
+              ,[Tel2] as Tel
+              ,2 Posicao
 			  ,[DataEnriquecimento]
-		      ,[Lote]
+              ,[Lote]
 			  ,0 NaoPerturbe
 		  FROM [dbo].[Telefone]
 		union
 		SELECT [Cpf]
-		      ,[Empresa]
-		      ,[Tel3] as Tel
-		      ,3 Posicao
+              ,[Empresa]
+              ,[Tel3] as Tel
+              ,3 Posicao
 			  ,[DataEnriquecimento]
-		      ,[Lote]
+              ,[Lote]
 			  ,0 NaoPerturbe
 		  FROM [dbo].[Telefone]
 		union
 		SELECT [Cpf]
-		      ,[Empresa]
-		      ,[Tel4] as Tel
-		      ,4 Posicao
+              ,[Empresa]
+              ,[Tel4] as Tel
+              ,4 Posicao
 			  ,[DataEnriquecimento]
-		      ,[Lote]
+              ,[Lote]
 			  ,0 NaoPerturbe
 		  FROM [dbo].[Telefone]
 		union
 		SELECT [Cpf]
-		      ,[Empresa]
-		      ,[Tel5] as Tel
-		      ,5 Posicao
+              ,[Empresa]
+              ,[Tel5] as Tel
+              ,5 Posicao
 			  ,[DataEnriquecimento]
-		      ,[Lote]
+              ,[Lote]
 			  ,0 NaoPerturbe
 		  FROM [dbo].[Telefone]
 		  ) a
