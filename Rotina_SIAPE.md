@@ -673,7 +673,7 @@ GO
 >13. Todos esses dados serão inseridos em diferentes tabelas, então deixei uma query pronta para criação das tabelas usadas em DB, Cadastro_NEW, Consolidado_NEW, Contrato_NEW. Verificar se precisa de mais tabelas.
 
 ```sql
---Tabela Consolidado em MOVEDB
+--Tabela Consolidado em DB
 CREATE TABLE DB..Consolidado_NEW(
 	[Orgao] [int] NOT NULL,
 	[Instituidor] [bigint] NULL,
@@ -704,7 +704,7 @@ CREATE TABLE DB..Consolidado_NEW(
 ) ON [PRIMARY]
 GO
 
---Tabela Contrato em MOVEDB
+--Tabela Contrato em DB
 CREATE TABLE DB..Contrato_NEW(
 	[IdContrato] [int] IDENTITY(1,1) NOT NULL,
 	[CodOrgao] [int] NULL,
@@ -727,7 +727,7 @@ GO
 >14. Na data de 03/07/2023 alinhamos sobre a inserção dos dados nas tabelas de produção e o que foi acordado até o momento é que vamos nos basear no que está até então na tabela de produção. Desta forma pegamos as rubricas que o DBA até o momento separa e encontramos um total de 106.
 
 ```sql
---Essa query abaixo retirou as 106 da tabela que esta em MOVEDB. Pensando que as rubricas ate entao corretas vieram do ultimo carregamento do Fernando dos dados de SIAPE.
+--Essa query abaixo retirou as 106 da tabela que esta em DB. Pensando que as rubricas ate entao corretas vieram do ultimo carregamento do Fernando dos dados de SIAPE.
 SELECT DISTINCT RUBRICA 
 INTO CARGAS..ListagemRubrica
 FROM DB..Contrato
@@ -737,7 +737,7 @@ FROM DB..Contrato
 
 ```sql
 --Importante esse select para inserir na nova tabela.
---Os dados estão vindo de um join com tabela de rubrica que hoje esta rodando no servidor tabela CONTRATO EM MOVEDB.
+--Os dados estão vindo de um join com tabela de rubrica que hoje esta rodando no servidor tabela CONTRATO EM DB.
 --Será verificada possibilidade de mudança com as rubricas corretas, deixar essa listagem de rubrica sempre a mão para usar.
 INSERT INTO DB..Contrato_NEW 
 SELECT A.[Orgao]        AS CodOrgao
@@ -761,7 +761,7 @@ SELECT A.[Orgao]        AS CodOrgao
   >16. Agora vamos inserir os dados na tabela DB..Consolidado_NEW, respeitando alguns campos da forma como é feita hoje (julho23). A coluna "Lixo" ja estava no ETL e estamos continuando o processo. Conforme informações esses campos em breve sofrerão atualizações. Outra regra é fazer o update para atualizar o campo Cartao onde Util5 maior que 0.
 
   ```sql
-  --INSERT DOS ARQUIVOS JUNTOS VINDO DO EXCEL, PENXLS e SXLS na tabela nova de MOVEDB..Consolidado_NEW
+  --INSERT DOS ARQUIVOS JUNTOS VINDO DO EXCEL, PENXLS e SXLS na tabela nova de DB..Consolidado_NEW
 INSERT INTO DB..Consolidado_NEW
 SELECT [Orgao]                        AS Orgao
       ,[Instituidor]                  AS Instituidor
@@ -800,10 +800,10 @@ SET Cartao=1
 WHERE Util5 >0.00
 
 ```
->17. Apos a inserção dos dados vamos criar os indices das tabelas MOVEDB..Contrato_NEW e MOVEDB..Consolidado_NEW. ***Obervação: Se o processo foi feito no servidor de ETL temos que carregar no de Produção e depois rodar os indices. 
+>17. Apos a inserção dos dados vamos criar os indices das tabelas DB..Contrato_NEW e DB..Consolidado_NEW. ***Obervação: Se o processo foi feito no servidor de ETL temos que carregar no de Produção e depois rodar os indices. 
 
 ```sql
---Criação dos Indices tabela MOVEDB..Consolidado_NEW
+--Criação dos Indices tabela DB..Consolidado_NEW
 CREATE NONCLUSTERED INDEX [Idx_Consolidade_BaseCalc] ON DB..Consolidado_NEW
 (
 	[BaseCalc] ASC
@@ -823,7 +823,7 @@ CREATE NONCLUSTERED INDEX [IDX_N_CLU_BaseCalc_MargemSaldo] ON DB..Consolidado_NE
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
 
-CREATE NONCLUSTERED INDEX [IDX_N_CLU_BaseCalc_SituacaoFuncional_MargemSaldo_INCLUDE_Orgao] ON MOVEDB..Consolidado_NEW
+CREATE NONCLUSTERED INDEX [IDX_N_CLU_BaseCalc_SituacaoFuncional_MargemSaldo_INCLUDE_Orgao] ON DB..Consolidado_NEW
 (
 	[BaseCalc] ASC,
 	[SituacaoFuncional] ASC,
@@ -841,8 +841,8 @@ CREATE NONCLUSTERED INDEX [IDX_N_CLU_OrgaoBaseCalSitucaoFuncionalMargemSaldo] ON
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
 
---Criação dos Indices tabela MOVEDB..Contrato_NEW
-CREATE CLUSTERED INDEX [idx_Contrato_CPF] ON MOVEDB..Contrato_NEW
+--Criação dos Indices tabela DB..Contrato_NEW
+CREATE CLUSTERED INDEX [idx_Contrato_CPF] ON DB..Contrato_NEW
 (
 	[Cpf] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
@@ -883,7 +883,7 @@ GO
 
 ```
 
->18. Terminado o processo renomeie MOVEDB..Consolidado para DB..Consolidado_OLD e depois DB..Consolidado_NEW para MOVEDB..Consolidado, faça isso também com a Contrato.
+>18. Terminado o processo renomeie DB..Consolidado para DB..Consolidado_OLD e depois DB..Consolidado_NEW para DB..Consolidado, faça isso também com a Contrato.
 
 
 <div align="center">
