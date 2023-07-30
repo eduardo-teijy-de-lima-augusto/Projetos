@@ -885,6 +885,11 @@ GO
 
 >18. Terminado o processo renomeie MOVEDB..Consolidado para DB..Consolidado_OLD e depois DB..Consolidado_NEW para MOVEDB..Consolidado, faça isso também com a Contrato.
 
+
+<div align="center">
+    <img src="./Pngs/Tabelas_NEW.png" alt="DashGo Sistema" height="150">
+</div>
+
 ```sql
 
 EXEC sp_rename 'DB..Consolidado', 'Consolidado_OLD'
