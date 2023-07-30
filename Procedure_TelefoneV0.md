@@ -97,8 +97,8 @@ BEGIN
             ) A
 		  where tel is not null and Tel<>0
 		
-		-----------------------------------------------------------------------------------------
-		--3 Update TelefoneV1 onde v1.tel=v0.tel [CP].[dbo].[TelefoneV0].[NaoPerturbe]
+-----------------------------------------------------------------------------------------
+--3 Update TelefoneV1 onde v1.tel=v0.tel [CP].[dbo].[TelefoneV0].[NaoPerturbe]
 		UPDATE      A
 		SET         A.[NaoPerturbe] = B.[NaoPerturbe]
 		FROM        [CP].[dbo].[TelefoneV1] A
@@ -106,20 +106,20 @@ BEGIN
                     ON A.[Tel] = B.[Tel]
 		WHERE B.[NaoPerturbe] =1
 		
-		----------------------------------------------------------------------------------------
-		--4 Criar indice na tabela nova gerada CP..TelefoneV1
+----------------------------------------------------------------------------------------
+--4 Criar indice na tabela nova gerada CP..TelefoneV1
 		CREATE NONCLUSTERED INDEX [IDX_TF_Cpf] ON [dbo].[TelefoneV1]
 		(
 			[Cpf] ASC
 		)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 		
 		
-		--------------------------------------------------------------------------------------
-		--5 Renomear a tabela em uso de CP..TelefoneV0 para CP..TelefoneV0.old 
+--------------------------------------------------------------------------------------
+--5 Renomear a tabela em uso de CP..TelefoneV0 para CP..TelefoneV0.old 
 		EXEC sp_rename 'TelefoneV0', 'TelefoneV0_OLD';
 		
-		--------------------------------------------------------------------------------------
-		--6 Renomear a tabela nova gerada CP..TelefoneV1 para CP..TelefoneV0
+--------------------------------------------------------------------------------------
+--6 Renomear a tabela nova gerada CP..TelefoneV1 para CP..TelefoneV0
 		EXEC sp_rename 'TelefoneV1', 'TelefoneV0';
 
 END
