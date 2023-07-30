@@ -642,7 +642,7 @@ SELECT [Orgao]
   UNION ALL
 
 SELECT [Orgao]
-	  ,CAST(0 AS BIGINT)      AS Instituidor
+      ,CAST(0 AS BIGINT)      AS Instituidor
       ,[Matricula]
       ,[BaseCalc]
       ,[Bruta5]
