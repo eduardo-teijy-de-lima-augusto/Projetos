@@ -763,7 +763,8 @@ SELECT A.[Orgao]        AS CodOrgao
   ```sql
   --INSERT DOS ARQUIVOS JUNTOS VINDO DO EXCEL, PXLS e SXLS na tabela nova de DB..Consolidado_NEW
 INSERT INTO DB..Consolidado_NEW
-SELECT [Orgao]                        AS Orgao
+SELECT 
+       [Orgao]                        AS Orgao
       ,[Instituidor]                  AS Instituidor
       ,[Matricula]                    AS Matricula
       ,[BaseCalc]                     AS BaseCalc
