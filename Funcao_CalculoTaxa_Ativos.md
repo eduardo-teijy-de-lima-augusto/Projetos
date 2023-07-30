@@ -1,5 +1,5 @@
 
->1. Função criada pelo Desenvolvimento a pedido da Diretoria para calcular a taxa dos emprestimos. Esse calculo deve ser feito na tabela Dados_Aivos em uma coluna nova chamada Taxa2. A função abaixo se encontra no SQL Server com o nome CalcularTaxa2. **Nao é necessario rodar essa função ela ja esta no SQL Server, serve como documentação apenas**.
+>1. Função criada pelo Desenvolvimento a pedido da Diretoria para calcular a taxa dos emprestimos. Esse calculo deve ser feito na tabela Dados_Ativos em uma coluna nova chamada Taxa2. A função abaixo se encontra no SQL Server com o nome CalcularTaxa2. **Nao é necessario rodar essa função ela ja esta no SQL Server, serve como documentação apenas**.
 
 
 
@@ -103,122 +103,122 @@ END
 
 ---
 
->2. **Antes de rodar essa atualização crie uma nova tabela Dados_Aivos_Taxa para ter um backup**. Crie os indices para que o processo seja mais rápido.
+>2. **Antes de rodar essa atualização crie uma nova tabela Dados_Ativos_Taxa para ter um backup**. Crie os indices para que o processo seja mais rápido.
 
 ```sql
 --Cria uma cópia de segurança para manipular os dados.
-SELECT * INTO CAMP..Dados_Aivos_NEW FROM CAMP..Dados_Aivos
+SELECT * INTO CAMP..Dados_Ativos_NEW FROM CAMP..Dados_Ativos
 GO
 
 --Adicionando as colunas na tabela.
-ALTER TABLE CAMP..Dados_Aivos_NEW
+ALTER TABLE CAMP..Dados_Ativos_NEW
 ADD Taxa2 DECIMAL(18,2)
 GO
-ALTER TABLE CAMP..Dados_Aivos_NEW
+ALTER TABLE CAMP..Dados_Ativos_NEW
 ADD SaldoDevedor DECIMAL(18,2)
 GO
 
 --Crie os indices na tabela
 USE CAMP
 GO
-CREATE NONCLUSTERED INDEX [IDX_CLU_Cpf] ON [dbo].[Dados_Aivos_NEW]
+CREATE NONCLUSTERED INDEX [IDX_CLU_Cpf] ON [dbo].[Dados_Ativos_NEW]
 (
 	[Cpf] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
 
-CREATE NONCLUSTERED INDEX [IDX_N_CLU_Ativo] ON [dbo].[Dados_Aivos_NEW]
+CREATE NONCLUSTERED INDEX [IDX_N_CLU_Ativo] ON [dbo].[Dados_Ativos_NEW]
 (
 	[Ativo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
 
-CREATE NONCLUSTERED INDEX [IDX_N_CLU_Banco] ON [dbo].[Dados_Aivos_NEW]
+CREATE NONCLUSTERED INDEX [IDX_N_CLU_Banco] ON [dbo].[Dados_Ativos_NEW]
 (
 	[Banco] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
 
-CREATE NONCLUSTERED INDEX [IDX_N_CLU_BancoPagamento] ON [dbo].[Dados_Aivos_NEW]
+CREATE NONCLUSTERED INDEX [IDX_N_CLU_BancoPagamento] ON [dbo].[Dados_Ativos_NEW]
 (
 	[BancoPagamento] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
 
-CREATE NONCLUSTERED INDEX [IDX_N_CLU_Beneficio] ON [dbo].[Dados_Aivos_NEW]
+CREATE NONCLUSTERED INDEX [IDX_N_CLU_Beneficio] ON [dbo].[Dados_Ativos_NEW]
 (
 	[Beneficio] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
 
-CREATE NONCLUSTERED INDEX [IDX_N_CLU_Esp] ON [dbo].[Dados_Aivos_NEW]
+CREATE NONCLUSTERED INDEX [IDX_N_CLU_Esp] ON [dbo].[Dados_Ativos_NEW]
 (
 	[Esp] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
 
-CREATE NONCLUSTERED INDEX [IDX_N_CLU_Margem] ON [dbo].[Dados_Aivos_NEW]
+CREATE NONCLUSTERED INDEX [IDX_N_CLU_Margem] ON [dbo].[Dados_Ativos_NEW]
 (
 	[Margem35] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
 
-CREATE NONCLUSTERED INDEX [IDX_N_CLU_ParcelasPagas] ON [dbo].[Dados_Aivos_NEW]
+CREATE NONCLUSTERED INDEX [IDX_N_CLU_ParcelasPagas] ON [dbo].[Dados_Ativos_NEW]
 (
 	[ParcelasPagas] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
 
-CREATE NONCLUSTERED INDEX [IDX_N_CLU_Prazo] ON [dbo].[Dados_Aivos_NEW]
+CREATE NONCLUSTERED INDEX [IDX_N_CLU_Prazo] ON [dbo].[Dados_Ativos_NEW]
 (
 	[Prazo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
 
-CREATE NONCLUSTERED INDEX [IDX_N_CLU_Rmc] ON [dbo].[Dados_Aivos_NEW]
+CREATE NONCLUSTERED INDEX [IDX_N_CLU_Rmc] ON [dbo].[Dados_Ativos_NEW]
 (
 	[Rmc] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
 
-CREATE NONCLUSTERED INDEX [IDX_N_CLU_Salario] ON [dbo].[Dados_Aivos_NEW]
+CREATE NONCLUSTERED INDEX [IDX_N_CLU_Salario] ON [dbo].[Dados_Ativos_NEW]
 (
 	[Salario] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
 
-CREATE NONCLUSTERED INDEX [IDX_N_CLU_Taxa] ON [dbo].[Dados_Aivos_NEW]
+CREATE NONCLUSTERED INDEX [IDX_N_CLU_Taxa] ON [dbo].[Dados_Ativos_NEW]
 (
 	[Taxa] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
 
 
-CREATE NONCLUSTERED INDEX [IDX_N_CLU_Ddb] ON [dbo].[Dados_Aivos_NEW]
+CREATE NONCLUSTERED INDEX [IDX_N_CLU_Ddb] ON [dbo].[Dados_Ativos_NEW]
 (
 	[Ddb] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
 
-CREATE NONCLUSTERED INDEX [IDX_N_CLU_Dib] ON [dbo].[Dados_Aivos_NEW]
+CREATE NONCLUSTERED INDEX [IDX_N_CLU_Dib] ON [dbo].[Dados_Ativos_NEW]
 (
 	[Dib] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
 
-CREATE NONCLUSTERED INDEX [IDX_N_CLU_Tipo] ON [dbo].[Dados_Aivos_NEW]
+CREATE NONCLUSTERED INDEX [IDX_N_CLU_Tipo] ON [dbo].[Dados_Ativos_NEW]
 (
 	[Tipo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
 
-CREATE NONCLUSTERED INDEX [IDX_N_CLU_ValorParcela] ON [dbo].[Dados_Aivos_NEW]
+CREATE NONCLUSTERED INDEX [IDX_N_CLU_ValorParcela] ON [dbo].[Dados_Ativos_NEW]
 (
 	[ValorParcela] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
 
-CREATE NONCLUSTERED INDEX [IDX_N_CLU_Rcc] ON [dbo].[Dados_Aivos_NEW]
+CREATE NONCLUSTERED INDEX [IDX_N_CLU_Rcc] ON [dbo].[Dados_Ativos_NEW]
 (
 	[Rcc] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
@@ -241,7 +241,7 @@ WHILE (@RowCount > 0)
 BEGIN
 UPDATE TOP (@BatchSize) C
     SET C.Taxa2 = [dbo].CalcularTaxa2(C.Prazo, C.ValorParcela, C.ValorEmprestimo)
-    FROM [CAMP].[dbo].[Dados_Aivos_NEW] C
+    FROM [CAMP].[dbo].[Dados_Ativos_NEW] C
 	WHERE C.[Taxa2] IS NULL -- Atualiza apenas os registros não atualizados
  SET @RowCount = @@ROWCOUNT;
 
@@ -255,7 +255,7 @@ END
 
 UPDATE C
     SET C.Taxa2 = [dbo].CalcularTaxa2(C.Prazo, C.ValorParcela, C.ValorEmprestimo)
-    FROM [CAMP].[dbo].[Dados_Aivos_NEW] C
+    FROM [CAMP].[dbo].[Dados_Ativos_NEW] C
 
   ```
 ---
@@ -310,7 +310,7 @@ DECLARE @BatchSize INT = 1000000;
 
 WHILE (@RowCount > 0)
 BEGIN
-    UPDATE TOP (@BatchSize) [CAMP].[dbo].[Dados_Aivos_NEW]
+    UPDATE TOP (@BatchSize) [CAMP].[dbo].[Dados_Ativos_NEW]
     SET SaldoDevedor = [dbo].CalcularSaldo(Prazo, ParcelasPagas, Taxa2, ValorParcela)
         WHERE [SaldoDevedor] IS NULL -- Atualiza apenas os registros não atualizados
     SET @RowCount = @@ROWCOUNT;
@@ -321,7 +321,7 @@ BEGIN
 END
 
 --Essa query fará o update completo entretanto de uma vez só. O que pode causar gargalo no SQL Server.
-UPDATE [CAMP].[dbo].[Dados_Aivos_NEW]
+UPDATE [CAMP].[dbo].[Dados_Ativos_NEW]
     SET SaldoDevedor = [dbo].CalcularSaldo(Prazo, ParcelasPagas, Taxa2, ValorParcela)
 ```
 
@@ -332,7 +332,7 @@ UPDATE [CAMP].[dbo].[Dados_Aivos_NEW]
 ```sql
 --Procurando Taxa2 que não foi calculada.
 SELECT *
-FROM CAMP..Dados_Aivos_NEW
+FROM CAMP..Dados_Ativos_NEW
 WHERE Taxa2 IS NULL
 
 --Caso seja encontrada linhas nulas verificar com a liderança o que fazer nesse caso, a ultima atualização foi orientado colocar o valor de 1.5
@@ -340,21 +340,21 @@ WHERE Taxa2 IS NULL
 ---
 
 
->7. Após a atualização das duas colunas Taxa2 e SaldoDevedor, renomeie a Coluna Taxa para Taxaold e a Taxa2 para Taxa da tabela Dados_Aivos_NEW. Apos renomeie a tabela em produção Dados_Aivos para Dados_Aivos_OLD e coloque a outra em produção renomenando (retire o _NEW).
+>7. Após a atualização das duas colunas Taxa2 e SaldoDevedor, renomeie a Coluna Taxa para Taxaold e a Taxa2 para Taxa da tabela Dados_Ativos_NEW. Apos renomeie a tabela em produção Dados_Ativos para Dados_Ativos_OLD e coloque a outra em produção renomenando (retire o _NEW).
 
 ```sql
 -- Renomear a coluna "taxa" para "taxaold"
-EXEC sp_rename 'CAMP.dbo.Dados_Aivos_NEW.taxa', 'Taxaold', 'COLUMN';
+EXEC sp_rename 'CAMP.dbo.Dados_Ativos_NEW.taxa', 'Taxaold', 'COLUMN';
 
 -- Renomear a coluna "taxa2" para "taxa"
-EXEC sp_rename 'CAMP.dbo.Dados_Aivos_NEW.taxa2', 'Taxa', 'COLUMN';
+EXEC sp_rename 'CAMP.dbo.Dados_Ativos_NEW.taxa2', 'Taxa', 'COLUMN';
 
 
--- Renomear a tabela "Dados_Aivos" para "Dados_Aivos_OLD"
-EXEC sp_rename 'CAMP.dbo.Dados_Aivos', 'Dados_Aivos_OLD';
+-- Renomear a tabela "Dados_Ativos" para "Dados_Ativos_OLD"
+EXEC sp_rename 'CAMP.dbo.Dados_Ativos', 'Dados_Ativos_OLD';
 
--- Renomear a tabela "Dados_Aivos_NEW" para "Dados_Aivos"
-EXEC sp_rename 'CAMP.dbo.Dados_Aivos_NEW', 'Dados_Aivos';
+-- Renomear a tabela "Dados_Ativos_NEW" para "Dados_Ativos"
+EXEC sp_rename 'CAMP.dbo.Dados_Ativos_NEW', 'Dados_Ativos';
 
 ```
 
@@ -371,11 +371,11 @@ DECLARE @TotalRows INT;
 DECLARE @UpdatedRows INT;
 DECLARE @BatchSize INT = 100000;
 
-SELECT @TotalRows = COUNT(*) FROM [CAMP].[dbo].[Dados_Aivos_Taxa];
+SELECT @TotalRows = COUNT(*) FROM [CAMP].[dbo].[Dados_Ativos_Taxa];
 
 WHILE (@TotalRows > 0)
 BEGIN
-    SELECT @UpdatedRows = COUNT(*) FROM [CAMP].[dbo].[Dados_Aivos_Taxa] WHERE [SaldoDevedor] IS NOT NULL;
+    SELECT @UpdatedRows = COUNT(*) FROM [CAMP].[dbo].[Dados_Ativos_Taxa] WHERE [SaldoDevedor] IS NOT NULL;
 
     PRINT CONCAT('Progresso: ', @UpdatedRows, ' de ', @TotalRows, ' linhas atualizadas.');
 
