@@ -761,15 +761,15 @@ SELECT A.[Orgao]        AS CodOrgao
   >16. Agora vamos inserir os dados na tabela DB..Consolidado_NEW, respeitando alguns campos da forma como é feita hoje (julho23). A coluna "Lixo" ja estava no ETL e estamos continuando o processo. Conforme informações esses campos em breve sofrerão atualizações. Outra regra é fazer o update para atualizar o campo Cartao onde Util5 maior que 0.
 
   ```sql
-  --INSERT DOS ARQUIVOS JUNTOS VINDO DO EXCEL, PENXLS e SXLS na tabela nova de DB..Consolidado_NEW
+  --INSERT DOS ARQUIVOS JUNTOS VINDO DO EXCEL, PXLS e SXLS na tabela nova de DB..Consolidado_NEW
 INSERT INTO DB..Consolidado_NEW
 SELECT [Orgao]                        AS Orgao
       ,[Instituidor]                  AS Instituidor
       ,[Matricula]                    AS Matricula
       ,[BaseCalc]                     AS BaseCalc
-      ,[Bruta5]	                      AS Bruta5
-      ,[Utilz5]	                      AS Util5
-      ,[Saldo5]	                      AS Saldo5
+      ,[Bruta5]                       AS Bruta5
+      ,[Utilz5]                       AS Util5
+      ,[Saldo5]                       AS Saldo5
       ,[Bruta35]                      AS Bruta30
       ,[Utilz35]                      AS Util30
       ,[Saldo35]                      AS Saldo30
@@ -783,7 +783,7 @@ SELECT [Orgao]                        AS Orgao
       ,(SUBSTRING ([ARQUPAG],11,12))  AS Sigla
       ,CONCAT(EXCQTD, ' - ', EXCSoma) AS Lixo
       ,[RJUR]                         AS RJUR
-      ,[SitFunc]			          AS SituacaoFuncional
+      ,[SitFunc]                      AS SituacaoFuncional
       ,[CPF]                          AS CPF
 	  ,NULL                           AS MargemNova
 	  ,0                              AS Cartao
