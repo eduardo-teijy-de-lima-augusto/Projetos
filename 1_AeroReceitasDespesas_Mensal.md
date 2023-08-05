@@ -1,5 +1,5 @@
 
-# Tabela Campanhas2 AeroReceitasDespesas rotina mensal de atualização
+# Tabela CA AeroReceitasDespesas rotina mensal de atualização
 ---
 ## Essa documentação descreve o processo de atualização da tabela AeroReceitasDespesas
 ---
@@ -31,10 +31,10 @@
 >4. Renomeie as colunas para adequar a regra do negócio
 
 ```sql
-EXEC sp_rename 'CAMPANHAS2.DBO.AeroDespesas_NEW.[N O M E]','NOME','COLUMN'
-EXEC sp_rename 'CAMPANHAS2.DBO.AeroReceitas_NEW.[N O M E]','NOME','COLUMN'
-EXEC sp_rename 'CAMPANHAS2.DBO.AeroDespesas_NEW.N#ORDEM','MATRICULA','COLUMN'
-EXEC sp_rename 'CAMPANHAS2.DBO.AeroReceitas_NEW.N#ORDEM','MATRICULA','COLUMN'
+EXEC sp_rename 'CA.DBO.AeroDespesas_NEW.[N O M E]','NOME','COLUMN'
+EXEC sp_rename 'CA.DBO.AeroReceitas_NEW.[N O M E]','NOME','COLUMN'
+EXEC sp_rename 'CA.DBO.AeroDespesas_NEW.N#ORDEM','MATRICULA','COLUMN'
+EXEC sp_rename 'CA.DBO.AeroReceitas_NEW.N#ORDEM','MATRICULA','COLUMN'
 ```
 ---
 
@@ -58,8 +58,8 @@ SELECT
    ,CAST(NULL AS nvarchar(150))           AS TIPO_DESCONTO
    ,CAST(NULL AS nvarchar(150))           AS INCIDENCIA_MARGEM
    ,CAST('Despesas' AS nvarchar(10))      AS ORIGEM         --Importante, diz de onde veio o dado.
-INTO CAMPANHAS2..AeroReceitasDespesas_New
-FROM CAMPANHAS2..AeroDespesas_NEW
+INTO CA..AeroReceitasDespesas_New
+FROM CA..AeroDespesas_NEW
 
 UNION ALL
 
@@ -80,7 +80,7 @@ SELECT
    ,CAST(NULL AS nvarchar(150))           AS TIPO_DESCONTO
    ,CAST(NULL AS nvarchar(150))           AS INCIDENCIA_MARGEM
    ,CAST('Receitas' AS nvarchar(10))      AS ORIGEM         --Importante, diz de onde veio o dado.
-FROM CAMPANHAS2..AeroReceitas_NEW
+FROM CA..AeroReceitas_NEW
 
 GO
 ```
@@ -89,14 +89,14 @@ GO
 ```sql
   --Verificando os dados que vieram como texto com a tabela em produção.
 SELECT DISTINCT A.CPF, A.NOME, A.UPAG, B.UPAG, B.DESC_UPAG
-FROM CAMPANHAS2..AeroReceitasDespesas_New A
+FROM CA..AeroReceitasDespesas_New A
 INNER JOIN CARGAS..AeroReceitasDespesas B ON A.CPF=B.CPF
 WHERE ISNUMERIC(A.UPAG)=0
 
 --Update dos NUMEROS de upag em relação a ultima tabela que esta em produção.
 UPDATE A
 SET A.UPAG=B.UPAG
-FROM CAMPANHAS2..AeroReceitasDespesas_New A
+FROM CA..AeroReceitasDespesas_New A
 INNER JOIN CARGAS..AeroReceitasDespesas B ON A.CPF=B.CPF
 WHERE ISNUMERIC(A.UPAG)=0 
 
@@ -135,18 +135,18 @@ SET A.UPAG= CASE
                WHEN A.UPAG ='GAP SP'      THEN '142510'
                ELSE A.UPAG
             END
-FROM CAMPANHAS2..AeroReceitasDespesas_New A
+FROM CA..AeroReceitasDespesas_New A
 WHERE ISNUMERIC(A.UPAG)=0
 
 
 --Alterando a coluna para int
-ALTER TABLE CAMPANHAS2..AeroReceitasDespesas_NEW
+ALTER TABLE CA..AeroReceitasDespesas_NEW
 ALTER COLUMN UPAG INT
 
 --Update das UPAGs ja com os numeros corretos, com a tabela padrão de upags.
 UPDATE A
 SET A.DESC_UPAG=B.DESC_UPAG
-FROM CAMPANHAS2..AeroReceitasDespesas_NEW A
+FROM CA..AeroReceitasDespesas_NEW A
 INNER JOIN CARGAS..AeroDescricaoUPAG B ON A.UPAG=B.UPAG
 
 ```
@@ -168,7 +168,7 @@ INNER JOIN CARGAS..AeroDescricaoUPAG B ON A.UPAG=B.UPAG
  ```sql
  UPDATE A
 SET A.DESC_TIPO=B.DESC_TIPO
-FROM CAMPANHAS2..AeroReceitasDespesas_NEW A
+FROM CA..AeroReceitasDespesas_NEW A
 INNER JOIN CARGAS..AeroDescricaoTIPO B ON A.Tipo=B.Tipo
 
 ```
@@ -183,7 +183,7 @@ SET A.DESC_CAIXA=B.DESC_CAIXA
     ,A.DESCRICAO=B.DESCRICAO
     ,A.TIPO_DESCONTO=B.TIPO_DESCONTO
     ,A.INCIDENCIA_MARGEM=B.INCIDENCIA_MARGEM
-FROM CAMPANHAS2..AeroReceitasDespesas_NEW A
+FROM CA..AeroReceitasDespesas_NEW A
 INNER JOIN CARGAS..AeroDescricaoCAIXA B ON A.CAIXA=B.CAIXA
 
 ```

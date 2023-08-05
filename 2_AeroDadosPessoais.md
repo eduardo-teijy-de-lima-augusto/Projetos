@@ -1,4 +1,4 @@
-# Rotina Mensal Aeronautica CAMPANHAS2..AeroDadosPessoais. Começar com a tabela AeroReceitasDespesas_NEW para depois iniciar esse processo.
+# Rotina Mensal Aeronautica CA..AeroDadosPessoais. Começar com a tabela AeroReceitasDespesas_NEW para depois iniciar esse processo.
 
 ## Apos terminado esse ETL CONSULTE A DOCUMENTAÇÃO: AeroRobo, pois esse fluxo irá explicar o ETL a ser feito em relação a leitura de Holeriths.
 
@@ -7,7 +7,7 @@
 ```sql
 
 --Conte o numero de CPFs Distintos que vieram da fonte em AeroReceitasDespesas_New
- SELECT COUNT(DISTINCT CPF) FROM CAMPANHAS2..AeroReceitasDespesas_New
+ SELECT COUNT(DISTINCT CPF) FROM CA..AeroReceitasDespesas_New
 GO
 
 --Crie uma nova tabela de AeroDadosPessoais a princípio apenas com os CPFs distintos que estão em AeroReceitasDespesas_New
@@ -39,15 +39,15 @@ SELECT DISTINCT
       ,CAST(GETDATE()	 AS date)           AS ATUALIZACAO
       ,CAST(0          	 AS bit)            AS TB_TELEFONE
       ,CAST(NULL         AS nvarchar(10))   AS ORIGEM
-  INTO CAMPANHAS2..AeroDadosPessoais_NEW
-  FROM CAMPANHAS2..AeroReceitasDespesas_NEW
+  INTO CA..AeroDadosPessoais_NEW
+  FROM CA..AeroReceitasDespesas_NEW
 GO
 
   --Faça o update do nome para a nova tabela, garantindo assim a não repetição de CPFs na tabela.
   UPDATE A
   SET A.NOME=B.NOME
-  FROM CAMPANHAS2..AeroDadosPessoais_NEW A
-  INNER JOIN CAMPANHAS2..AeroReceitasDespesas_New B ON A.CPF=B.CPF
+  FROM CA..AeroDadosPessoais_NEW A
+  INNER JOIN CA..AeroReceitasDespesas_New B ON A.CPF=B.CPF
 
 
 ```
@@ -70,7 +70,7 @@ SET
    ,A.CEP=B.CEP
    ,A.CIDADE=B.CIDADE
    ,A.UF=B.UF
-FROM CAMPANHAS2..AeroDadosPessoais_NEW A
+FROM CA..AeroDadosPessoais_NEW A
 INNER JOIN CARGAS..AeroDadosPessoais B ON A.CPF=B.CPF
 
 ```
@@ -81,12 +81,12 @@ INNER JOIN CARGAS..AeroDadosPessoais B ON A.CPF=B.CPF
 
 --Verifcando quantos CPFs nao tem data de nascimento.
 SELECT COUNT(CPF)
-FROM CAMPANHAS2..AeroDadosPessoais_NEW
+FROM CA..AeroDadosPessoais_NEW
 WHERE DT_NASC IS NULL
 
 --Verifique as linhas pois tem muitos nomes que estão em branco e podemos pegar em CARGAS..CPF_UF
 SELECT *
-FROM CAMPANHAS2..AeroDadosPessoais_NEW
+FROM CA..AeroDadosPessoais_NEW
 WHERE DT_NASC IS NULL
 
 ```
@@ -99,7 +99,7 @@ SET A.NOME=B.NOME
    ,A.NOME_MAE=B.NOME_MAE
    ,A.DT_NASC=CAST(B.NASC AS date)
    ,A.IDADE=FLOOR(DATEDIFF(DAY, A.DT_NASC, GETDATE()) / 365.25)
-FROM CAMPANHAS2..AeroDadosPessoais_NEW A
+FROM CA..AeroDadosPessoais_NEW A
 INNER JOIN CARGAS..CPF_UF B ON A.CPF=B.CPF
 WHERE A.DT_NASC IS NULL
 GO
@@ -109,13 +109,13 @@ UPDATE A
 SET A.NOME=B.NOME
    ,A.DT_NASC=CAST(B.NASC AS date)
    ,A.IDADE=FLOOR(DATEDIFF(DAY, A.DT_NASC, GETDATE()) / 365.25)
-FROM CAMPANHAS2..AeroDadosPessoais_NEW A
+FROM CA..AeroDadosPessoais_NEW A
 INNER JOIN CARGAS..CPF_Pessoas B ON A.CPF=B.CPF
 WHERE A.DT_NASC IS NULL
 
 
 --Delete da tabela os CPFs que estão nulos
-DELETE FROM CAMPANHAS2..AeroDadosPessoais_NEW
+DELETE FROM CA..AeroDadosPessoais_NEW
 WHERE CPF IS NULL
 
 ```
@@ -126,10 +126,10 @@ WHERE CPF IS NULL
 
 ```sql
  --Some os campos que estão em AeroReceitasDespesas_NEW conforme regra do negocio tanto em receitas como despesas.
-UPDATE CAMPANHAS2..AeroDadosPessoais_NEW
+UPDATE CA..AeroDadosPessoais_NEW
 SET VLR_BRUTO = (
                   SELECT SUM(A.VALOR)
-                  FROM CAMPANHAS2..AeroReceitasDespesas_NEW A
+                  FROM CA..AeroReceitasDespesas_NEW A
                   WHERE A.CPF = AeroDadosPessoais_NEW.CPF
                   AND A.ORIGEM = 'Receitas'
                   GROUP BY A.CPF	
@@ -137,10 +137,10 @@ SET VLR_BRUTO = (
 GO
 
 --Soma das Despesas.
-UPDATE CAMPANHAS2..AeroDadosPessoais_NEW
+UPDATE CA..AeroDadosPessoais_NEW
 SET VLR_DESPESA = (
                     SELECT SUM(A.VALOR)
-                    FROM CAMPANHAS2..AeroReceitasDespesas_NEW A
+                    FROM CA..AeroReceitasDespesas_NEW A
                     WHERE A.CPF = AeroDadosPessoais_NEW.CPF
                     AND A.ORIGEM = 'Despesas'
                     GROUP BY A.CPF
@@ -164,7 +164,7 @@ SET AP.IR = CAST(
                      ELSE (AP.VLR_BRUTO * 0.275) - 884.96
                   END AS DECIMAL(18, 2)
 				)
-                FROM CAMPANHAS2..AeroDadosPessoais_NEW AS AP 
+                FROM CA..AeroDadosPessoais_NEW AS AP 
                 WHERE AP.CPF NOT IN ( SELECT CPF FROM CARGAS..AeroReceitasDespesas WHERE caixa = 'IR')
 
 
@@ -173,7 +173,7 @@ SET AP.IR = CAST(
 
 ```sql
 --Calculo do VLR_BRUTO_IR quando for maior que zero.
-UPDATE CAMPANHAS2..AeroDadosPessoais_NEW
+UPDATE CA..AeroDadosPessoais_NEW
 SET VLR_BRUTO_IR=
                  CASE
                      WHEN IR > 0 THEN (VLR_BRUTO - IR)
@@ -191,7 +191,7 @@ GO
 ```sql
 --Calcule as Margens e o valor liquido de cada CPF
 --Nesse caso VALOR BRUTO DO IR * 70% - VALOR DE DESPESAS SERA A MARGEM 70. ISSO ESTA CORRETO?
-UPDATE CAMPANHAS2..AeroDadosPessoais_NEW
+UPDATE CA..AeroDadosPessoais_NEW
 SET MARGEM70 = 
               CASE
                   WHEN IR > 0 THEN ((VLR_BRUTO_IR * 0.7) - VLR_DESPESA)
@@ -206,7 +206,7 @@ GO
 ```sql
 --Calcule as Margens e o valor liquido de cada CPF
 --Nesse caso VALOR BRUTO DO IR * 30% - VALOR DE DESPESAS SERA A MARGEM 70. ISSO ESTA CORRETO?
-UPDATE CAMPANHAS2..AeroDadosPessoais_NEW
+UPDATE CA..AeroDadosPessoais_NEW
 SET MARGEM30 = 
               CASE
                   WHEN IR > 0 THEN ((VLR_BRUTO_IR * 0.3) - VLR_DESPESA)
@@ -221,7 +221,7 @@ GO
 
 ```sql
 --Update valor liquido, VLR_BRUTO - VLR_DESPESA
-UPDATE CAMPANHAS2..AeroDadosPessoais_NEW
+UPDATE CA..AeroDadosPessoais_NEW
 SET VLR_LIQUIDO = 
               CASE
                   WHEN IR > 0 THEN (VLR_BRUTO_IR - VLR_DESPESA)
@@ -234,7 +234,7 @@ GO
 
 ```sql
 --Criação dos indices AeroDadosPessoais_NEW
-USE [CAMPANHAS2]
+USE [CA]
 GO
 
 CREATE NONCLUSTERED INDEX [IDX_N_CLU_Cpf] ON [dbo].[AeroDadosPessoais_NEW]
@@ -257,7 +257,7 @@ GO
 
 
 --Criação dos indices AeroReceitasDespesas_NEW
-USE [CAMPANHAS2]
+USE [CA]
 GO
 
 CREATE NONCLUSTERED INDEX [IDX_N_CLU_Caixa] ON [dbo].[AeroReceitasDespesas_NEW]

@@ -61,8 +61,8 @@ SET A.BANCO=B.BANCO
    ,A.AGENCIA=B.AGENCIA
    ,A.CONTA=B.CONTA_CORRENTE
    ,A.ISENCAO_IR=B.ISENCAO_IR
-FROM CAMPANHAS2..AeroDadosPessoais_NEW A
+FROM CA..AeroDadosPessoais_NEW A
 INNER JOIN CARGAS..tbAero_CCH B ON A.CPF=B.CPF
 ```
 
-## Copie as novas tabelas CAMPANHAS2..AeroDadosPessoais_NEW e AeroReceitasDespesas_NEW e não ESQUEÇA DE CRIAR OS INDICES.
+## Copie as novas tabelas CA..AeroDadosPessoais_NEW e AeroReceitasDespesas_NEW e não ESQUEÇA DE CRIAR OS INDICES.
