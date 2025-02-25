@@ -173,7 +173,10 @@ sudo docker compose up -d
 - ➡️ Em teoria nunca se perde os fluxos, mas melhor testar antes
 
 ```bash
-sudo docker compose down
+docker compose down --remove-orphans
+docker compose pull typebot-builder
+docker compose pull typebot-viewer
+docker compose up -d
 ```
 
 - ➡️ Verificando o serviço em execução
