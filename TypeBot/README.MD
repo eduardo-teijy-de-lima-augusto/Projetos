@@ -1,5 +1,12 @@
 <h1 align="center">🚀 Instalação e configuração do TypeBot 🚀</h1> 
 
+# 💡 Overview
+
+- 🔥 O processo de configuração do serviço em si é complexo, então deixei alguns links para consulta que não devem ser ignorados caso algo falhe
+- 🛠️ Utilize as consultas caso algo falhe ou deseje implementar mais recursos
+
+
+
 
 ## Fluxo
 
