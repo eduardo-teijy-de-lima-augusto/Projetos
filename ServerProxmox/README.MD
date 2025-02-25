@@ -1,9 +1,8 @@
 <h1 align="center">🚀 Configuração do container de proxmox 🚀</h1> 
 
 
-
-
+- ➡️ Crie o CT
 
 <div align="center">
-    <img src="/ServerProxmox/Pngs/CreateCT.png" alt="DashGo Sistema" height="320">
+    <img src="/ServerProxmox/Pngs/CreateCT.png" alt="DashGo Sistema" height="220">
 </div>
