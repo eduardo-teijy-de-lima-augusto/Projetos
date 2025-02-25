@@ -1,6 +1,8 @@
 <h1 align="center">🚀 Configuração básica do kernel Linux Ubuntu 🚀</h1> 
 
 
+## Fluxo
+
 - ➡️ Acesse o container no proxmox, vá ate console e faça login como root
 - ➡️ Atualize os pacotes do sistema
 
