@@ -2,7 +2,7 @@
 
 # 💡 Overview
 
-- 🔥 O processo de configuração do serviço em si é complexo, então deixei alguns links para consulta que não devem ser ignorados caso algo falhe
+- 🔥 O processo de configuração do serviço em si é complexo, então deixei alguns links para consulta que não devem ser ignorados
 - 🛠️ Utilize as consultas caso algo falhe ou deseje implementar mais recursos
 
 
