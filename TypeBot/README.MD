@@ -12,6 +12,12 @@
 sudo mkdir -p /opt/docker/typebot
 ```
 
+- ➡️ Vá até a pasta criada:
+
+``` bash
+cd /opt/docker/typebot
+```
+
 - ➡️ Baixe os Arquivos Necessários:
 
 ```bash
