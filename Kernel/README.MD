@@ -32,8 +32,8 @@ usermod -aG sudo sysadmin
 - ➡️ Abra o vscode e adicione o servidor ao arquivo ssh padrão
 
 ```bash
-  Host TypeBotEvolutionAPI
-  HostName 192.168.15.180
+  Host TypeBotHomologacao
+  HostName 192.168.15.170
   User sysadmin
 ```
 - ➡️ Faça a conexão pelo vscode, abra um terminal e continue o tutorial
