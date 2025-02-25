@@ -25,7 +25,7 @@ sudo wget https://raw.githubusercontent.com/baptisteArno/typebot.io/latest/docke
 ```
 ```bash
 sudo wget https://raw.githubusercontent.com/baptisteArno/typebot.io/latest/.env.example -O .env
-```ks
+```
 
 
 No vscode abra a pasta typebot, e clique no arquivo .env
