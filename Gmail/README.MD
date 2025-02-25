@@ -10,5 +10,5 @@
 
 
 <div align="center">
-    <img src="../Gmail/Pngs/GerenciamentoConta.png" alt="DashGo Sistema" height="220">
+    <img src="../Gmail/Pngs/GerenciamentoConta.png" alt="DashGo Sistema" height="420">
 </div>
