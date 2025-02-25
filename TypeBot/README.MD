@@ -89,16 +89,13 @@ SMTP_SECURE=false
 NEXT_PUBLIC_DISABLE_SIGNUP=true  # Se quiser desativar o cadastro de novos usuários
 ```
 
-- ➡️ 
-
 - ➡️ Para mais detalhes sobre outras opções de autenticação, consulte a documentação oficial.
 - ➡️ https://docs.typebot.io/self-hosting/configuration
 
-Dentro da pasta do typebot existe um arquivo chamado docker-compose.yml
+- ➡️ Dentro da pasta do typebot existe um arquivo chamado docker-compose.yml
+- ➡️ Abra o arquivo no vscode e altere as portas mencionadas acima que serão 4000 e 4001
 
-Abra o arquivo no vscode va ate o repositorio e copie o conteúdo desse arquivo e cole substituindo tudo
 
-- Dessa forma estamos direcionando as portas do TypeBot para 3000:3000 e 3001:3000
 
 4. Se tudo estiver correto agora vamos subir o docker compose:
 
