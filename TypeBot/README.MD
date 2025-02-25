@@ -48,25 +48,25 @@ DATABASE_URL=postgresql://postgres:typebot@typebot-db:5432/typebot
 NODE_OPTIONS=--no-node-snapshot
 
 # URLs do Typebot (corretamente mapeadas para as portas 8080 e 8081)
-NEXTAUTH_URL=http://agetech.duckdns.org:3000
-NEXT_PUBLIC_VIEWER_URL=http://agetech.duckdns.org:3001
+NEXTAUTH_URL=http://preencha.url.com.br:porta
+NEXT_PUBLIC_VIEWER_URL=http://preencha.url.com.br:porta
 
 # E-mail de Administrador (para receber notificações ou autenticar-se)
-ADMIN_EMAIL=duaugusto@gmail.com
+ADMIN_EMAIL=emaildoadmin@gmail.com
 
 # Configuração do Servidor SMTP (Gmail)
-EMAIL_SERVER=smtp://duaugusto%40gmail.com:gypr qfrf cazu uzvx@smtp.gmail.com:587
-EMAIL_FROM="Typebot <duaugusto@gmail.com>"
+EMAIL_SERVER=smtp://emaildoadmin%40gmail.com:senha do app gerada@smtp.gmail.com:587
+EMAIL_FROM="Typebot <emaildoadmin@gmail.com>"
 
 # Ativar a autenticação via e-mail no Typebot
 EMAIL_SIGNIN_ENABLED=true
 
 # Configuração de Segurança do SMTP
-SMTP_USERNAME=duaugusto@gmail.com
-SMTP_PASSWORD=gypr qfrf cazu uzvx
+SMTP_USERNAME=emaildoadmin@gmail.com
+SMTP_PASSWORD=senha do app gerada
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
-NEXT_PUBLIC_SMTP_FROM="Typebot <duaugusto@gmail.com>"
+NEXT_PUBLIC_SMTP_FROM="Typebot <emaildoadmin@gmail.com>"
 SMTP_SECURE=false
 
 # Outras Configurações Relevantes (se aplicável)
