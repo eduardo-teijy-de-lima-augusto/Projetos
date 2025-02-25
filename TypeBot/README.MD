@@ -27,14 +27,58 @@ sudo wget https://raw.githubusercontent.com/baptisteArno/typebot.io/latest/docke
 sudo wget https://raw.githubusercontent.com/baptisteArno/typebot.io/latest/.env.example -O .env
 ```
 
-
-- ➡️ No vscode abra a pasta typebot, e clique no arquivo .env
-- ➡️ Copie o codigo completo que esta no repositorio (arquivo .env) e cole substituindo tudo nesse arquivo.
 - ➡️ Gere uma Chave Secreta de 32 Caracteres:
+- ➡️ Copie a chave pois vamos usar a mesma no arquivo .env
 
 ```bash
 openssl rand -base64 24 | tr -d '\n' ; echo
 ```
+
+- ➡️ No vscode abra a pasta typebot, e clique no arquivo .env
+- ➡️ A configuração padrão é muito simples, então foi alterada use o exemplo abaixo e faça as alterações necessárias:
+
+```bash
+# Chave de Criptografia (32 caracteres aleatórios)
+ENCRYPTION_SECRET=cole aqui a chave copiada no passo anterior
+
+# Configuração do Banco de Dados (PostgreSQL)
+DATABASE_URL=postgresql://postgres:typebot@typebot-db:5432/typebot
+
+# Opções do Node.js
+NODE_OPTIONS=--no-node-snapshot
+
+# URLs do Typebot (corretamente mapeadas para as portas 8080 e 8081)
+NEXTAUTH_URL=http://agetech.duckdns.org:3000
+NEXT_PUBLIC_VIEWER_URL=http://agetech.duckdns.org:3001
+
+# E-mail de Administrador (para receber notificações ou autenticar-se)
+ADMIN_EMAIL=duaugusto@gmail.com
+
+# Configuração do Servidor SMTP (Gmail)
+EMAIL_SERVER=smtp://duaugusto%40gmail.com:gypr qfrf cazu uzvx@smtp.gmail.com:587
+EMAIL_FROM="Typebot <duaugusto@gmail.com>"
+
+# Ativar a autenticação via e-mail no Typebot
+EMAIL_SIGNIN_ENABLED=true
+
+# Configuração de Segurança do SMTP
+SMTP_USERNAME=duaugusto@gmail.com
+SMTP_PASSWORD=gypr qfrf cazu uzvx
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+NEXT_PUBLIC_SMTP_FROM="Typebot <duaugusto@gmail.com>"
+SMTP_SECURE=false
+
+# Outras Configurações Relevantes (se aplicável)
+NEXT_PUBLIC_DISABLE_SIGNUP=true  # Se quiser desativar o cadastro de novos usuários
+```
+
+
+
+
+
+- ➡️ Copie o codigo completo que esta no repositorio (arquivo .env) e cole substituindo tudo nesse arquivo.
+
 
 Copie o valor gerado e cole no arquivo .env na variável ENCRYPTION_SECRET.
 
