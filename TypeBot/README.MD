@@ -138,6 +138,7 @@ services:
 ```
 
 - ➡️ Abra as portas no firewall do servidor e do modem utilizado (vivo, tim ou claro)
+- ➡️ Crie as regras no modem das portas 4000 e 4001
 - ➡️ Se tudo estiver correto agora vamos subir o docker compose:
 - ➡️ Dentro da pasta /opt/docker/typebot execute o comando:
 
