@@ -8,9 +8,31 @@
 sudo apt update && sudo apt upgrade -y
 ```
 
+- ➡️ Instale o pacote de net-tools:
 
-    - ➡️ Template Linux Ubuntu 22.04
-    - ➡️ Storage nvme2tb - 100 GB Armazenamento    
-    - ➡️ CPU - 2 Cores 
-    - ➡️ Memoria e Swap - 4096 Ram
-    - ➡️ Network Static - IP 192.168.15.170/24 - Gateway IP 192.168.15.1
+```bash
+sudo apt install net-tools
+```
+
+- ➡️ Crie um usuário para acessar via ssh ou vscode:
+
+```bash
+adduser sysadmin
+```
+
+- ➡️ Inclua o usuario no grupo de sudo:
+
+```bash
+usermod -aG sudo sysadmin
+```
+
+- ➡️ A partir desse momento podemos acessar o servidor atraves do vs-code:
+- ➡️ Abra o vscode e adicione o servidor ao arquivo ssh padrão
+
+```bash
+  Host TypeBotEvolutionAPI
+  HostName 192.168.15.180
+  User sysadmin
+```
+- ➡️ Faça a conexão pelo vscode, abra um terminal e continue o tutorial
+
