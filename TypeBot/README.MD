@@ -12,6 +12,17 @@
 sudo mkdir -p /opt/docker/typebot
 ```
 
+- ➡️ Permissões do usuario sysadmin na pasta para alterações:
+
+```bash
+sudo chown -R sysadmin:sysadmin /opt/docker
+```
+
+```bash
+sudo chmod -R 755 /opt/docker
+```
+
+
 - ➡️ Vá até a pasta criada:
 
 ``` bash
