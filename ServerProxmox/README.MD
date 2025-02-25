@@ -9,10 +9,9 @@
     - ➡️ Memoria e Swap - 4096 Ram
     - ➡️ Network Static - IP 192.168.15.170/24 - Gateway IP 192.168.15.1
 
-
-## <div align="center">
-##    <img src="/ServerProxmox/Pngs/CreateCT.png" alt="DashGo Sistema" height="220">
-## </div>
+<div align="center">
+    <img src="/ServerProxmox/Pngs/CreateCT.png" alt="DashGo Sistema" height="220">
+</div>
 
 
 
