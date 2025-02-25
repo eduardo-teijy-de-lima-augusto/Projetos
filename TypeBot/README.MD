@@ -190,21 +190,16 @@ sudo docker ps -a
 - ➡️ Sera solicitado o email para entrar: use o email que esta configurado no arquivo .env
 - ➡️ Uma chave de acesso sera enviada para o email padrão.
 
-
-
 ---
 
-6. Considerações Adicionais - *** Verificar essa opção para SSL (https) quando for migrar ele para acesso externo.
+## Considerações Adicionais 
+- ➡️ *** Verificar essa opção para SSL (https) quando for migrar ele para acesso externo.
 Proxy Reverso e SSL: Para produção, é recomendável configurar um proxy reverso (como Nginx ou Traefik) e habilitar SSL/TLS para segurança. Isso permitirá que você acesse o Typebot via HTTPS e em portas padrão (80/443).
 
-Atualizações: Para manter o Typebot atualizado:
-
-```bash
-docker compose pull
-docker compose up -d
-```
-
-Armazenamento de Dados: Os dados do Typebot são armazenados no diretório .typebot dentro do diretório de instalação. Certifique-se de configurar backups regulares para evitar perda de dados.
+- ➡️ Armazenamento de Dados: Os dados do Typebot são armazenados no diretório .typebot dentro do diretório de instalação. Certifique-se de configurar backups regulares para evitar perda de dados.
 
 
 ### Crie um snapshot ate aqui com a instalação do typebot para segurança.
+
+- ➡️ Configuração bem sucedida, volte a home e continue o tutorial
+- [Home](/README.md)
