@@ -21,46 +21,47 @@ sudo apt install git -y
 - ➡️ Para instalar o Evolution API acesse o repositorio:
     - ➡️ https://github.com/evolutionapi/evolution-api
     - ➡️ Vá ate <> CODE e copie o endereço para ser clonado no git do servidor.
-    - ➡️ https://github.com/EvolutionAPI/evolution-api.git
-- Abra o terminal no servidor, saia da pasta do typebot e clone o repositorio:
+    - ➡️ Abra o terminal no servidor, saia da pasta do typebot e clone o repositorio:
 
 ```bash
 sudo git clone https://github.com/EvolutionAPI/evolution-api.git
 ```
 
-Ao gerar o clone uma pasta chamada evolution-api sera criada com todos os arquivos necessarios para funcionamento.
+- ➡️ Ao gerar o clone uma pasta chamada evolution-api sera criada com todos os arquivos necessarios para funcionamento.
 
 OBSERVAÇÕES:
 
-- Dentro da pasta do evolution-api existe um arquivo chamado .env.example, mude o nome para .env
-- Caso de erro de permissão, garanta que o usuario sysadmin tem acesso completo na pasta:
+- ➡️ Dentro da pasta do evolution-api existe um arquivo chamado .env.example, mude o nome para .env
+- ➡️ Caso de erro de permissão, garanta que o usuario sysadmin tem acesso completo na pasta:
 
 ```bash
-sudo chown -R sysadmin:sysadmin /home/sysadmin/evolution-api
-sudo chmod -R 770 /home/sysadmin/evolution-api
+sudo chown -R sysadmin:sysadmin /opt/docker/evolution-api
+sudo chmod -R 770 /opt/docker/evolution-api
 ```
 
-Agora vamos editar o arquivo .env e mudar algumas configurações:
+- ➡️ Agora vamos editar o arquivo .env e mudar algumas configurações:
 
-- Logo no inicio do arquivo altere a opção:
-    - SERVER_URL=http://localhost:8080 para o endereço de IP do servidor:
-        - SERVER_URL=http://192.168.15.180:8080
-- Procure essa linha no arquivo e altere:
-    - CACHE_REDIS_URI=redis://localhost:6379/6
-        - CACHE_REDIS_URI=redis://192.168.15.180:6379/6
-- Procure também essa linha para habilitar o typebot pois vem desligado:
-    - TYPEBOT_ENABLED=false
-        - TYPEBOT_ENABLED=true
+- ➡️ Logo no inicio do arquivo altere a opção:
+    - ➡️ Usaremos aqui a porta 8090 pois a vivo pode ter bloqueado acesso a 8080
+    - ➡️ SERVER_URL=http://localhost:8080 para o endereço de IP do servidor:
+        - ➡️SERVER_URL=http://192.168.15.170:8090
+- ➡️ Procure essa linha no arquivo e altere:
+    - ➡️ Isso evitará erros no redis para subir o serviço (efetuado testes)
+    - ➡️CACHE_REDIS_URI=redis://localhost:6379/6
+        - ➡️CACHE_REDIS_URI=redis://192.168.15.170:6379/6
+- ➡️ Procure também essa linha para habilitar o typebot pois vem desligado:
+    - ➡️ TYPEBOT_ENABLED=false
+        - ➡️ TYPEBOT_ENABLED=true
 
-Se tudo estiver correto inicie o docker do Evolution API: (entre na pasta do evolution api)
+- ➡️ Se tudo estiver correto inicie o docker do Evolution API: (entre na pasta do evolution api)
 
 ```bash
 sudo docker compose up -d
 ```
 
-Acesse o endereço url do Evolution API:
+- ➡️ Acesse o endereço url do Evolution API:
 
-- http://192.168.15.180:8080/
+- http://192.168.15.170:8090/
 - Deverá aparecer essa informação:
 
 ```json
