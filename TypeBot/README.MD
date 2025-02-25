@@ -29,10 +29,7 @@ sudo wget https://raw.githubusercontent.com/baptisteArno/typebot.io/latest/.env.
 
 
 - ➡️ No vscode abra a pasta typebot, e clique no arquivo .env
-
 - ➡️ Copie o codigo completo que esta no repositorio (arquivo .env) e cole substituindo tudo nesse arquivo.
-
-
 - ➡️ Gere uma Chave Secreta de 32 Caracteres:
 
 ```bash
