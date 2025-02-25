@@ -35,7 +35,12 @@ openssl rand -base64 24 | tr -d '\n' ; echo
 ```
 
 - ➡️ No vscode abra a pasta typebot, e clique no arquivo .env
-- ➡️ A configuração padrão é muito simples, então foi alterada copie cole o exemplo abaixo e faça as alterações necessárias:
+- ➡️ A configuração padrão é muito simples, então foi alterada; copie cole o exemplo abaixo e faça as alterações necessárias:
+- ➡️ **Observação:** Vamos usar as portas 4000 e 4001 (padrão 3000 e 3001)
+    - ➡️ Lembrando que temos que também configurar o firewall para acesso as portas
+    - ➡️ Configurar também o arquivo docker-compose.yml para não gerar erros
+
+
 
 ```bash
 # Chave de Criptografia (32 caracteres aleatórios)
@@ -47,7 +52,7 @@ DATABASE_URL=postgresql://postgres:typebot@typebot-db:5432/typebot
 # Opções do Node.js
 NODE_OPTIONS=--no-node-snapshot
 
-# URLs do Typebot (corretamente mapeadas para as portas 8080 e 8081)
+# URLs do Typebot (vamos usar as portas 4000 e 4001 * Necessario ajustar o firewall)
 NEXTAUTH_URL=http://preencha.url.com.br:porta
 NEXT_PUBLIC_VIEWER_URL=http://preencha.url.com.br:porta
 
@@ -73,21 +78,10 @@ SMTP_SECURE=false
 NEXT_PUBLIC_DISABLE_SIGNUP=true  # Se quiser desativar o cadastro de novos usuários
 ```
 
+- ➡️ 
 
-
-
-
-- ➡️ Copie o codigo completo que esta no repositorio (arquivo .env) e cole substituindo tudo nesse arquivo.
-
-
-Copie o valor gerado e cole no arquivo .env na variável ENCRYPTION_SECRET.
-
-As demais configurações do arquivo .env estão corretas para o email com senha da api do google.
-
-- OBSERVAÇÃO: A senha do gmail tem que ser gerada na sua conta do google, ou seja, tem que ser gerada uma senha de APP, pois o google nao aceita conexões com a senha padrão.
-
-- Para mais detalhes sobre outras opções de autenticação, consulte a documentação oficial.
-- https://docs.typebot.io/self-hosting/configuration
+- ➡️ Para mais detalhes sobre outras opções de autenticação, consulte a documentação oficial.
+- ➡️ https://docs.typebot.io/self-hosting/configuration
 
 Dentro da pasta do typebot existe um arquivo chamado docker-compose.yml
 
