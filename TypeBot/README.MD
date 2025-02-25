@@ -94,28 +94,75 @@ NEXT_PUBLIC_DISABLE_SIGNUP=true  # Se quiser desativar o cadastro de novos usuá
 - ➡️ Dentro da pasta do typebot existe um arquivo chamado docker-compose.yml
 - ➡️ Abra o arquivo no vscode e altere as portas mencionadas acima que serão 4000 e 4001
 
+```bash
+version: '3.3'
 
+volumes:
+  db-data:
 
-4. Se tudo estiver correto agora vamos subir o docker compose:
+services:
+  typebot-db:
+    image: postgres:16
+    restart: always
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=typebot
+      - POSTGRES_PASSWORD=typebot
+    healthcheck:
+        test: ["CMD-SHELL", "pg_isready -U postgres"]
+        interval: 5s
+        timeout: 5s
+        retries: 5
+  typebot-builder:
+    image: baptistearno/typebot-builder:latest
+    restart: always
+    depends_on:
+      typebot-db:
+        condition: service_healthy
+    ports:
+      - '4000:4000'
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    env_file: .env
+
+  typebot-viewer:
+    image: baptistearno/typebot-viewer:latest
+    depends_on:
+      typebot-db:
+        condition: service_healthy
+    restart: always
+    ports:
+      - '4001:4000'
+    env_file: .env
+```
+
+- ➡️ Abra as portas no firewall do servidor e do modem utilizado (vivo, tim ou claro)
+- ➡️ Se tudo estiver correto agora vamos subir o docker compose:
+- ➡️ Dentro da pasta /opt/docker/typebot execute o comando:
 
 ```bash
 sudo docker compose up -d
 ```
 
-Se precisar baixar o docker:
+- ➡️ Se precisar baixar o docker:
 
 ```bash
 sudo docker compose down
 ```
 
+- ➡️ Verificando o serviço em execução
 
-5. Acesse o typebot através da url:
+```bash
+sudo docker ps -a
+```
 
-http://192.168.15.180:3000/
+- ➡️ Acesse o typebot através da url:
+- ➡️ http://agetech.duckdns.org:4000/
+- ➡️ Sera solicitado o email para entrar: use o email que esta configurado no arquivo .env
+- ➡️ Uma chave de acesso sera enviada para o email padrão.
 
-Sera solicitado o email para entrar: use o email que esta configurado no arquivo .env
 
-Uma chave de acesso sera enviada para o email padrão.
 
 ---
 
