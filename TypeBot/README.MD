@@ -21,9 +21,12 @@ cd /opt/docker/typebot
 - ➡️ Baixe os Arquivos Necessários:
 
 ```bash
-wget https://raw.githubusercontent.com/baptisteArno/typebot.io/latest/docker-compose.yml
-wget https://raw.githubusercontent.com/baptisteArno/typebot.io/latest/.env.example -O .env
+sudo wget https://raw.githubusercontent.com/baptisteArno/typebot.io/latest/docker-compose.yml
 ```
+```bash
+sudo wget https://raw.githubusercontent.com/baptisteArno/typebot.io/latest/.env.example -O .env
+```ks
+
 
 No vscode abra a pasta typebot, e clique no arquivo .env
 
