@@ -33,7 +33,8 @@
 - ➡️ Se a opção de Senhas de APP nao aparecer volte ate segurança va na lupa e procure
 - ➡️ Senhas de app, coloque o nome TypeBot e copie a senha gerada.
 
-
+- ➡️ Configuração bem sucedida, volte a home e continue o tutorial
+- [Home](/README.md)
 
 
 
