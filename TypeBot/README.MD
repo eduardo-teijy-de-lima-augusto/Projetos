@@ -6,6 +6,12 @@
 - 🛠️ Utilize as consultas caso algo falhe ou deseje implementar mais recursos
 
 
+- ➡️ Typebot Não Faz Login - Corrigindo o Erro de Login no Typebot
+    - ➡️ Este video esclarece algumas situações de login, e algumas configuraçoes visuais do docker-compose.yml
+    - ➡️ https://www.youtube.com/watch?v=l1ZLESl6rnk
+
+
+
 
 
 ## Fluxo
