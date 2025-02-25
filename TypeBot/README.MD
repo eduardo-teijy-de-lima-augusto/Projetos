@@ -5,6 +5,7 @@
 - 🔥 O processo de configuração do serviço em si é complexo, então deixei alguns links para consulta que não devem ser ignorados
 - 🛠️ Utilize as consultas caso algo falhe ou deseje implementar mais recursos
 
+## Links
 
 - ➡️ Typebot Não Faz Login - Corrigindo o Erro de Login no Typebot
     - ➡️ Este video esclarece algumas situações de login, e algumas configuraçoes visuais do docker-compose.yml
