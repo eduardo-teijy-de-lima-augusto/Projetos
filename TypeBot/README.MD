@@ -35,7 +35,7 @@ openssl rand -base64 24 | tr -d '\n' ; echo
 ```
 
 - ➡️ No vscode abra a pasta typebot, e clique no arquivo .env
-- ➡️ A configuração padrão é muito simples, então foi alterada use o exemplo abaixo e faça as alterações necessárias:
+- ➡️ A configuração padrão é muito simples, então foi alterada cope cole o exemplo abaixo e faça as alterações necessárias:
 
 ```bash
 # Chave de Criptografia (32 caracteres aleatórios)
