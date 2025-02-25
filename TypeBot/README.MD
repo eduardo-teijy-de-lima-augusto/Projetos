@@ -62,15 +62,19 @@ openssl rand -base64 24 | tr -d '\n' ; echo
 
 - ➡️ No vscode abra a pasta typebot, e clique no arquivo .env
 - ➡️ A configuração padrão é muito simples, então foi alterada; copie cole o exemplo abaixo e faça as alterações necessárias:
-- ➡️ **Observação:** Vamos usar as portas 4000 e 4001 (padrão 3000 e 3001)
+- ➡️ **Observação:** Vamos usar as portas 3000 e 3001
     - ➡️ Lembrando que temos que também configurar o firewall para acesso as portas
     - ➡️ Configurar também o arquivo docker-compose.yml para não gerar erros
+- ➡️ No arquivo que segue abaixo mude essa linha para o primeiro login do admin
+    - ➡️ DISABLE_SIGNUP=true - coloque como false, salve e suba as dockers
+    - ➡️ Depois do primeiro login do admin mude novamente para true, salve derrube as dockers e suba novamente.
+
 
 
 
 ```bash
 # Chave de Criptografia (32 caracteres aleatórios)
-ENCRYPTION_SECRET=cole aqui a chave copiada no passo anterior
+ENCRYPTION_SECRET=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 # Configuração do Banco de Dados (PostgreSQL)
 DATABASE_URL=postgresql://postgres:typebot@typebot-db:5432/typebot
@@ -78,26 +82,28 @@ DATABASE_URL=postgresql://postgres:typebot@typebot-db:5432/typebot
 # Opções do Node.js
 NODE_OPTIONS=--no-node-snapshot
 
-# URLs do Typebot (vamos usar as portas 4000 e 4001 * Necessario ajustar o firewall)
-NEXTAUTH_URL=http://preencha.url.com.br:porta
-NEXT_PUBLIC_VIEWER_URL=http://preencha.url.com.br:porta
+# URLs do Typebot (corretamente mapeadas para as portas 8080 e 8081)
+NEXTAUTH_URL=http://agetech.duckdns.org:3000
+NEXT_PUBLIC_VIEWER_URL=http://agetech.duckdns.org:3001
 
 # E-mail de Administrador (para receber notificações ou autenticar-se)
-ADMIN_EMAIL=emaildoadmin@gmail.com
+ADMIN_EMAIL=solutionsagetech@gmail.com
 
 # Configuração do Servidor SMTP (Gmail)
-EMAIL_SERVER=smtp://emaildoadmin%40gmail.com:senha do app gerada@smtp.gmail.com:587
-EMAIL_FROM="Typebot <emaildoadmin@gmail.com>"
+EMAIL_SERVER=smtp://solutionsagetech%40gmail.com:xxxx xxxx xxxx xxxx@smtp.gmail.com:587
+EMAIL_FROM="Typebot <solutionsagetech@gmail.com>"
 
-# Ativar a autenticação via e-mail no Typebot
-EMAIL_SIGNIN_ENABLED=true
+# Desativar cadastro de novos usuários
+# Ou seja, no primeiro cadastro devemos mentar como false para que o admin consiga entrar
+# Depois desabilitamos as dockers alteramos pra true e subimos as dockers novamente
+DISABLE_SIGNUP=true
 
 # Configuração de Segurança do SMTP
-SMTP_USERNAME=emaildoadmin@gmail.com
-SMTP_PASSWORD=senha do app gerada
+SMTP_USERNAME=solutionsagetech@gmail.com
+SMTP_PASSWORD=xxxx xxxx xxxx xxxx
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
-NEXT_PUBLIC_SMTP_FROM="Typebot <emaildoadmin@gmail.com>"
+NEXT_PUBLIC_SMTP_FROM="Typebot <solutionsagetech@gmail.com>"
 SMTP_SECURE=false
 
 # Outras Configurações Relevantes (se aplicável)
@@ -136,7 +142,7 @@ services:
       typebot-db:
         condition: service_healthy
     ports:
-      - '4000:4000'
+      - '3000:3000'
     extra_hosts:
       - 'host.docker.internal:host-gateway'
     env_file: .env
@@ -148,12 +154,12 @@ services:
         condition: service_healthy
     restart: always
     ports:
-      - '4001:4000'
+      - '3001:3000'
     env_file: .env
 ```
 
 - ➡️ Abra as portas no firewall do servidor e do modem utilizado (vivo, tim ou claro)
-- ➡️ Crie as regras no modem das portas 4000 e 4001
+- ➡️ Crie as regras no modem das portas 3000 e 3001
 - ➡️ Se tudo estiver correto agora vamos subir o docker compose:
 - ➡️ Dentro da pasta /opt/docker/typebot execute o comando:
 
@@ -162,6 +168,8 @@ sudo docker compose up -d
 ```
 
 - ➡️ Se precisar baixar o docker:
+- ➡️ A documentação aconselha sempre baixar o docker e atualizar, ou seja, ele deleta as imagens e faz o pull novamente
+- ➡️ Em teoria nunca se perde os fluxos, mas melhor testar antes
 
 ```bash
 sudo docker compose down
@@ -174,7 +182,7 @@ sudo docker ps -a
 ```
 
 - ➡️ Acesse o typebot através da url:
-- ➡️ http://agetech.duckdns.org:4000/
+- ➡️ http://agetech.duckdns.org:3000/
 - ➡️ Sera solicitado o email para entrar: use o email que esta configurado no arquivo .env
 - ➡️ Uma chave de acesso sera enviada para o email padrão.
 
