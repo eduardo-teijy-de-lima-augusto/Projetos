@@ -55,6 +55,7 @@ sudo wget https://raw.githubusercontent.com/baptisteArno/typebot.io/latest/.env.
 
 - ➡️ Gere uma Chave Secreta de 32 Caracteres:
 - ➡️ Copie a chave pois vamos usar a mesma no arquivo .env
+- ➡️ A chave encriptada esta no diretorio do drive pasta da empresa AgetechSolutions
 
 ```bash
 openssl rand -base64 24 | tr -d '\n' ; echo
