@@ -114,7 +114,7 @@ NEXT_PUBLIC_DISABLE_SIGNUP=true  # Se quiser desativar o cadastro de novos usuá
 - ➡️ Para mais detalhes sobre outras opções de autenticação, consulte a documentação oficial.
 - ➡️ https://docs.typebot.io/self-hosting/configuration
 - ➡️ Dentro da pasta do typebot existe um arquivo chamado docker-compose.yml
-- ➡️ Abra o arquivo no vscode e altere as portas mencionadas acima que serão 4000 e 4001
+- ➡️ Abra o arquivo no vscode e altere as portas mencionadas acima que serão 3000 e 3001
 
 ```bash
 version: '3.3'
