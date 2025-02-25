@@ -9,6 +9,7 @@
 
 - ➡️ Typebot Não Faz Login - Corrigindo o Erro de Login no Typebot
     - ➡️ Este video esclarece algumas situações de login, e algumas configuraçoes visuais do docker-compose.yml
+    - ➡️ Pude ver no vídeo algumas coisas interessantes como logins e confiruação do minio em docker compose
     - ➡️ https://www.youtube.com/watch?v=l1ZLESl6rnk
 
 
