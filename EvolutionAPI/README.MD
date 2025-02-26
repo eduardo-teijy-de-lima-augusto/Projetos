@@ -42,13 +42,13 @@ sudo chmod -R 770 /opt/docker/evolution-api
 - ➡️ Agora vamos editar o arquivo .env e mudar algumas configurações:
 
 - ➡️ Logo no inicio do arquivo altere a opção:
-    - ➡️ Usaremos aqui a porta 8090 pois a vivo pode ter bloqueado acesso a 8080
+    - ➡️ Usaremos aqui a porta 8080
     - ➡️ SERVER_URL=http://localhost:8080 para o endereço de IP do servidor:
-        - ➡️SERVER_URL=http://192.168.15.170:8090
+        - ➡️SERVER_URL=http://192.168.15.170:8080
 - ➡️ Procure essa linha no arquivo e altere:
     - ➡️ Isso evitará erros no redis para subir o serviço (efetuado testes)
     - ➡️CACHE_REDIS_URI=redis://localhost:6379/6
-        - ➡️CACHE_REDIS_URI=redis://192.168.15.170:6379/6
+        - ➡️CACHE_REDIS_URI=redis://redis:6379/6
 - ➡️ Procure também essa linha para habilitar o typebot pois vem desligado:
     - ➡️ TYPEBOT_ENABLED=false
         - ➡️ TYPEBOT_ENABLED=true
@@ -61,7 +61,7 @@ sudo docker compose up -d
 
 - ➡️ Acesse o endereço url do Evolution API:
 
-- http://192.168.15.170:8090/
+- http://192.168.15.170:8080/
 - Deverá aparecer essa informação:
 
 ```json
