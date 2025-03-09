@@ -59,6 +59,9 @@ sudo chmod -R 770 /opt/docker/evolution-api
 sudo docker compose up -d
 ```
 
+- ➡️ Incluir na documentação o comando do contrab para subir o redis.
+
+
 - ➡️ Acesse o endereço url do Evolution API:
 
 - http://192.168.15.170:8080/

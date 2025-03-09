@@ -28,12 +28,18 @@ adduser sysadmin
 usermod -aG sudo sysadmin
 ```
 
+- ➡️ Configure no roteador utilizado o acesso a porta 22 do ssh para o servidor específico
+  - No caso do proxmox utilize a porta 22 externa e 22 interna
+  - No caso de outros serviços use a porta com inicio 22xx e a interna para o Ip correspondente porta 22
+
+
 - ➡️ A partir desse momento podemos acessar o servidor atraves do vs-code:
 - ➡️ Abra o vscode e adicione o servidor ao arquivo ssh padrão
 
 ```bash
-  Host TypeBotHomologacao
-  HostName 192.168.15.170
+  Host typebotevolution
+  HostName agetechsolutions.duckdns.org
+  Port 2204
   User sysadmin
 ```
 - ➡️ Faça a conexão pelo vscode, abra um terminal e continue o tutorial
