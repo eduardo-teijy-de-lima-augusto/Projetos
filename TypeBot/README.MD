@@ -52,6 +52,134 @@ sudo wget https://raw.githubusercontent.com/baptisteArno/typebot.io/latest/docke
 ```bash
 sudo wget https://raw.githubusercontent.com/baptisteArno/typebot.io/latest/.env.example -O .env
 ```
+- ➡️ OBSERVAÇÃO**** 
+    - ➡️ Instalei uma nova versão em teoria 3.8 do link acima, o arquivo docker compose.yml é simples
+    - ➡️ Com a ajuda do chatgpt configuramos o arquivo novamente, use esse codigo para passar do login que estava dando erro.
+    - ➡️ Nesse arquivo consta variáveis que funcionam corretamente para o acesso aos postgres e redis
+    - ➡️ Em teoria o arquivo que vem é so de exemplo e se espera que façamos alterações necessarias
+```bash
+version: '3.8'
+
+x-typebot-common: &typebot-common
+  restart: always
+  depends_on:
+    typebot-redis:
+      condition: service_healthy
+    typebot-db:
+      condition: service_healthy
+  networks:
+    - typebot-network
+  env_file: .env
+  environment:
+    REDIS_URL: redis://typebot-redis:6379
+    DATABASE_URL: postgresql://typebot:typebot@typebot-db:5432/typebot
+
+services:
+  typebot-db:
+    image: postgres:16
+    restart: always
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=typebot
+      - POSTGRES_USER=typebot
+      - POSTGRES_PASSWORD=typebot
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U typebot"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - typebot-network
+
+  typebot-redis:
+    image: redis:alpine
+    restart: always
+    command: --save 60 1 --loglevel warning
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      start_period: 20s
+      interval: 30s
+      retries: 5
+      timeout: 3s
+    volumes:
+      - redis-data:/data
+    networks:
+      - typebot-network
+
+  typebot-builder:
+    <<: *typebot-common
+    image: baptistearno/typebot-builder:latest
+    ports:
+      - '3000:3000'
+
+  typebot-viewer:
+    <<: *typebot-common
+    image: baptistearno/typebot-viewer:latest
+    ports:
+      - '3001:3000'
+
+networks:
+  typebot-network:
+    driver: bridge
+
+volumes:
+  db-data:
+  redis-data:
+```
+
+- ➡️ OBSERVAÇÃO****
+  - ➡️ Arquivo .env que esta funcionando, usar esse mas mudar a ENCRYPTION_SECRET caso refaça a instalação
+  
+```bash
+# Chave de Criptografia (32 caracteres aleatórios)
+ENCRYPTION_SECRET=MZ9oVh4R/ioLMVmnN11wKs9pox4445cx
+
+# Configuração do Banco de Dados (PostgreSQL)
+DATABASE_URL=postgresql://postgres:typebot@typebot-db:5432/typebot
+
+# Opções do Node.js
+NODE_OPTIONS=--no-node-snapshot
+
+# URLs do Typebot (corretamente mapeadas para as portas 8080 e 8081)
+NEXTAUTH_URL=http://agetechsolutions.duckdns.org:3000
+NEXT_PUBLIC_VIEWER_URL=http://agetechsolutions.duckdns.org:3001
+
+# E-mail de Administrador (para receber notificações ou autenticar-se)
+ADMIN_EMAIL=solutionsagetech@gmail.com
+
+# Configuração do Servidor SMTP (Gmail)
+EMAIL_SERVER=smtp://solutionsagetech%40gmail.com:eizs aonn tqni xezh@smtp.gmail.com:587
+EMAIL_FROM="Typebot <solutionsagetech@gmail.com>"
+
+# Desativar cadastro de novos usuários
+# Ou seja, no primeiro cadastro devemos mentar como false para que o admin consiga entrar
+# Depois desabilitamos as dockers alteramos pra true e subimos as dockers novamente
+DISABLE_SIGNUP=false
+
+# Configuração de Segurança do SMTP
+SMTP_USERNAME=solutionsagetech@gmail.com
+SMTP_PASSWORD=eizs aonn tqni xezh
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+NEXT_PUBLIC_SMTP_FROM="Typebot <solutionsagetech@gmail.com>"
+SMTP_SECURE=false
+
+
+S3_ENDPOINT=http://agetechsolutions.duckdns.org:9000
+S3_ACCESS_KEY=admin
+S3_SECRET_KEY=Sysadmin##
+S3_BUCKET=images-bot
+S3_REGION=us-east-1
+S3_FORCE_PATH_STYLE=true
+
+
+
+
+
+# Outras Configurações Relevantes (se aplicável)
+NEXT_PUBLIC_DISABLE_SIGNUP=true  # Se quiser desativar o cadastro de novos usuários
+```
 
 - ➡️ Gere uma Chave Secreta de 32 Caracteres:
 - ➡️ Copie a chave pois vamos usar a mesma no arquivo .env
