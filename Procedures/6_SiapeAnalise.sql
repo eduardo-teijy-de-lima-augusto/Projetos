@@ -10,7 +10,7 @@ GO
 -- Author:      <Eduardo Augusto>
 -- Create date: <18/02/2024>
 -- Description: <Analise de SIAPE>
--- Irá gerar duas tabelas uma de Clientes e outra de Contratos.
+-- Irï¿½ gerar duas tabelas uma de Clientes e outra de Contratos.
 -- ===============================================================================================================================================================================
 
 CREATE OR ALTER   PROCEDURE [dbo].[SiapeAnalise]
@@ -31,7 +31,7 @@ BEGIN
 	    --============================================================================
 		-- Gera o select para analise de SIAPE
 		-- Analise_SIAPE_Contratos_
-		-- Altere a consulta caso seja necessário
+		-- Altere a consulta caso seja necessï¿½rio
 		--============================================================================
 
         -- Define o nome da nova tabela com base na data atual (MM_YYYY)
@@ -84,12 +84,12 @@ BEGIN
         INSERT INTO DB_MONITORAMENTO..logOperacoes 
         (Usuario, Convenio, NomeTabela, Operacao, QuantidadeAfetada, Descricao, TempoExecucao, Query)
         VALUES 
-        (SUSER_SNAME(), 'Siape', @NomeTabela, 'Criação e Inserção', CAST(@RowsAfetadas AS NVARCHAR(MAX)), @DescricaoLog, @TempoExecucao, REPLACE(@QuerySQL, '''', ''''''))
+        (SUSER_SNAME(), 'Siape', @NomeTabela, 'Criaï¿½ï¿½o e Inserï¿½ï¿½o', CAST(@RowsAfetadas AS NVARCHAR(MAX)), @DescricaoLog, @TempoExecucao, REPLACE(@QuerySQL, '''', ''''''))
 
 	    --============================================================================
 		-- Gera o select para analise de SIAPE
 		-- Analise_SIAPE_Clientes_
-		-- Altere a consulta caso seja necessário
+		-- Altere a consulta caso seja necessï¿½rio
 		--============================================================================
 
         -- Define o nome da nova tabela com base na data atual (MM_YYYY)
@@ -101,7 +101,7 @@ BEGIN
 
         SET @SQL = '
         SELECT DISTINCT  A.Cpf
-						,B.ds_nome				AS Nome
+						,B.ds_nome              AS Nome
 						,A.Vinculo				AS Tipo
 						,A.Matricula
 						,B.cs_banco 			AS Banco
@@ -144,7 +144,7 @@ BEGIN
         INSERT INTO DB_MONITORAMENTO..logOperacoes 
         (Usuario, Convenio, NomeTabela, Operacao, QuantidadeAfetada, Descricao, TempoExecucao, Query)
         VALUES 
-        (SUSER_SNAME(), 'Siape', @NomeTabela, 'Criação e Inserção', CAST(@RowsAfetadas AS NVARCHAR(MAX)), @DescricaoLog, @TempoExecucao, REPLACE(@QuerySQL, '''', ''''''))
+        (SUSER_SNAME(), 'Siape', @NomeTabela, 'Criaï¿½ï¿½o e Inserï¿½ï¿½o', CAST(@RowsAfetadas AS NVARCHAR(MAX)), @DescricaoLog, @TempoExecucao, REPLACE(@QuerySQL, '''', ''''''))
 
 
 
