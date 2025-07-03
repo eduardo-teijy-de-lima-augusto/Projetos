@@ -8,7 +8,7 @@ base_dir = r"D:\\siape\\extracted_files"  # Altere para o caminho correto
 # Detalhes do servidor Linux
 linux_host = "192.168.201.11"
 linux_user = "automacao"
-linux_password = "B@uT0m@ç@0!2025$"
+linux_password = "[Editado]"
 dest_dir_linux = "/mnt/sharewindows"
 
 # Lista dos arquivos que devem ser copiados (nomes exatos, independente da pasta)
